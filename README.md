@@ -21,7 +21,7 @@
 |              FE developer               |                                  FE Developer                                   |
 | :-------------------------------------: | :-----------------------------------------------------------------------------: |
 | [강현우](https://github.com/hyunw-kang) |                      [오태준](https://github.com/taejun0)                       |
-|       <img src="" width="300" />        | <img src="https://avatars.githubusercontent.com/u/164321668?v=4" width="300" /> |
+|       <img src="https://avatars.githubusercontent.com/u/156151246?v=4" width="300" />        | <img src="https://avatars.githubusercontent.com/u/164321668?v=4" width="300" /> |
 
 ## 🛠️ 기술 스택(Tech)
 
