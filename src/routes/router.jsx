@@ -6,7 +6,7 @@ import { DefaultLayout } from '@layouts/DefaultLayout';
 import { ROUTE_PATHS } from '@constants/routeConstants';
 
 import { MainPage } from '@pages/mainpage/MainPage';
-import { NotFound } from '@pages/notFound/NotFound';
+import { NotFound } from '@pages/notfound/NotFound';
 
 const router = createBrowserRouter([
   {
