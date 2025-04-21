@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - main
+      - develop
   pull_request:
     branches:
       - main
+      - develop
 
 jobs:
   deploy:
@@ -44,8 +46,19 @@ jobs:
             echo "VERCEL_TOKEN is properly set."
           fi
 
-      - name: Deploy to Vercel
+      - name: Conditional deploy to Vercel
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
-          vercel --prod --yes --token $VERCEL_TOKEN --cwd ./dist
+          if [ "${{ github.repository_owner }}" != "taejun0" ]; then
+            echo "⛔ Not personal repo. Skipping deploy..."
+            exit 0
+          fi
+
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            echo "🚀 Production deploy"
+            vercel --prod --yes --token $VERCEL_TOKEN --cwd ./dist
+          else
+            echo "👀 Preview deploy"
+            vercel --yes --token $VERCEL_TOKEN --cwd ./dist
+          fi

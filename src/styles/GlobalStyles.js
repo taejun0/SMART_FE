@@ -84,7 +84,7 @@ i {font-style:normal}
 
 // 초기 html 설정
 html {
-	background-color: ${({ theme }) => theme.colors.beige01};	
+	background-color: ${({ theme }) => theme.colors.white};	
 	display: flex;
 	justify-content: center;
 	align-items: center;
