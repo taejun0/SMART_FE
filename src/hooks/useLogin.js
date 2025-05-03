@@ -1,7 +1,13 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import AuthService from '@services/AuthService';
+
+import { ROUTE_PATHS } from '@constants/routeConstants';
 import { IMAGE_CONSTANTS } from '@constants/imageConstants';
 
 export const useLogin = () => {
+  const navigate = useNavigate();
   const [militaryId, setMilitaryId] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -27,6 +33,15 @@ export const useLogin = () => {
     ? IMAGE_CONSTANTS.EYE
     : IMAGE_CONSTANTS.TEXTHOLDER;
 
+  const onLogin = async () => {
+    try {
+      await AuthService.login({ militaryId, password });
+      navigate(ROUTE_PATHS.MAIN);
+    } catch (err) {
+      alert('로그인에 실패했습니다.');
+    }
+  };
+
   return {
     militaryId,
     password,
@@ -38,5 +53,6 @@ export const useLogin = () => {
     passwordEyeIconSrc,
     selectedRole,
     selectRole,
+    onLogin,
   };
 };

@@ -70,6 +70,8 @@ export const Signupbox = styled.div`
   margin-top: 60px;
   transform: translateY(-20px);
   gap: 8px;
+
+  cursor: pointer;
 `;
 
 export const Sign1 = styled.div`

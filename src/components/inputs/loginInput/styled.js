@@ -26,6 +26,13 @@ export const Input = styled.input`
   border: 1px solid ${({ theme }) => theme.colors.white02};
   padding: 0 1rem;
   margin-bottom: 2rem;
+
+  &:focus,
+  &:active,
+  &:focus-visible {
+    outline: none;
+    box-shadow: none;
+  }
 `;
 
 export const EyeIcon = styled.img`

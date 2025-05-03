@@ -1,5 +1,8 @@
 import * as S from './styled';
 
+import { useNavigate } from 'react-router-dom';
+
+import { ROUTE_PATHS } from '@constants/routeConstants';
 import { LoginConstants } from '@constants/loginConstants';
 import { useLogin } from '@hooks/useLogin';
 import LoginInput from '@components/inputs/loginInput/LoginInput';
@@ -17,7 +20,9 @@ export const LoginPage = () => {
     passwordEyeIconSrc,
     selectedRole,
     selectRole,
+    onLogin,
   } = useLogin();
+  const navigate = useNavigate();
   return (
     <S.Wrapper>
       <S.Container>
@@ -65,12 +70,12 @@ export const LoginPage = () => {
           togglePassword={togglePassword}
           eyeIconSrc={passwordEyeIconSrc}
         />
-        <S.Signupbox>
+        <S.Signupbox onClick={() => navigate(ROUTE_PATHS.SIGNUP)}>
           <S.Sign1>아직 회원이 아니신가요?</S.Sign1>
           <S.Sign2>회원가입하기</S.Sign2>
         </S.Signupbox>
 
-        <LoginButton disabled={!isValid}>
+        <LoginButton disabled={!isValid} onClick={onLogin}>
           {LoginConstants.BUTTON.LOGIN}
         </LoginButton>
       </S.Container>
