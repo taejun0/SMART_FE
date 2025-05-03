@@ -10,10 +10,27 @@ const AuthService = {
     };
   },
 
-  signup: async ({ militaryId, password, role }) => {
-    console.log('[MOCK SIGNUP]', { militaryId, password, role });
+  signup: async ({
+    name,
+    branch,
+    unit,
+    company,
+    platoon,
+    rank,
+    militaryId,
+    password,
+  }) => {
+    console.log('[MOCK SIGNUP]', {
+      name,
+      branch,
+      unit,
+      company,
+      platoon,
+      rank,
+      militaryId,
+      password,
+    });
 
-    // 회원가입 성공한 것처럼 응답
     return {
       success: true,
       message: '회원가입 성공',
