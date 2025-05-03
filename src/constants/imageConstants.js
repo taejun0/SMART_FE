@@ -46,4 +46,5 @@ export const IMAGE_CONSTANTS = {
   X: '/icons/x.svg',
 
   SOLDIER_MAIN: '/images/solider_main.svg',
+  SOLDIER_SPLASH: '/images/solider_splash.svg',
 };

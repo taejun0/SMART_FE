@@ -117,7 +117,6 @@ body {
 	background-color: ${({ theme }) => theme.colors.white};
 	color: ${({ theme }) => theme.colors.black};
 	font-family: 'SUIT', sans-serif;
-
 }
 
 `;
