@@ -8,6 +8,7 @@ import { ROUTE_PATHS } from '@constants/routeConstants';
 import { MainPage } from '@pages/mainpage/MainPage';
 import { LoginPage } from '@pages/loginpage/LoginPage';
 import { SignupPage } from '@pages/signuppage/SignupPage';
+import { SplashPage } from '@pages/splashpage/SplashPage';
 import { TrainingPage } from '@pages/trainingpage/TrainingPage';
 import { ReportPage } from '@pages/reportpage/ReportPage';
 import { NotFound } from '@pages/notfound/NotFound';
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: ROUTE_PATHS.SIGNUP,
         element: <SignupPage />,
+      },
+      {
+        path: ROUTE_PATHS.SPLASH,
+        element: <SplashPage />,
       },
       {
         path: ROUTE_PATHS.TRAINING,

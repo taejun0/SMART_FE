@@ -6,9 +6,10 @@ export const Wrapper = styled.div`
   bottom: 0;
 `;
 
-export const Button = styled.div`
+export const Button = styled.button`
   ${({ theme }) => theme.fonts.Subtitle_Bold_16};
   height: 52px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,10 +18,9 @@ export const Button = styled.div`
   background-color: ${({ theme }) => theme.colors.green01};
   cursor: pointer;
 
-  ${({ disabled, theme }) =>
-    disabled &&
-    `
-    background-color: ${theme.colors.brown04};
+  &:disabled {
+    background-color: ${({ theme }) => theme.colors.brown04};
     cursor: not-allowed;
-  `}
+    pointer-events: none;
+  }
 `;

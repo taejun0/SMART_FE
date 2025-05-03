@@ -9,11 +9,14 @@ export const LoginInput = ({
   showPassword,
   togglePassword,
   eyeIconSrc,
+  readOnly,
+  onClick,
+  children,
 }) => {
   const isPassword = type === 'password';
 
   return (
-    <S.Wrapper>
+    <S.Wrapper onClick={onClick}>
       <S.Container>
         <S.Label>{label}</S.Label>
         <S.Input
@@ -21,10 +24,12 @@ export const LoginInput = ({
           placeholder={placeholder}
           value={value}
           onChange={(e) => onChange(e.target.value)}
+          readOnly={readOnly}
         />
         {isPassword && value && (
           <S.EyeIcon src={eyeIconSrc} onClick={togglePassword} />
         )}
+        {children}
       </S.Container>
     </S.Wrapper>
   );

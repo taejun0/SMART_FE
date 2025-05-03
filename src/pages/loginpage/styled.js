@@ -64,6 +64,8 @@ export const Image = styled.img`
 `;
 
 export const Signupbox = styled.div`
+  position: fixed;
+  bottom: 20px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -82,4 +84,13 @@ export const Sign1 = styled.div`
 export const Sign2 = styled.div`
   ${({ theme }) => theme.fonts.Caption_ExtraBold_12};
   color: ${({ theme }) => theme.colors.green01};
+`;
+
+export const ButtonRow = styled.div`
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: row;
 `;
