@@ -42,15 +42,6 @@ export const Title = styled.div`
   white-space: pre-line;
 `;
 
-export const ButtonRow = styled.div`
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  right: 20px;
-  display: flex;
-  flex-direction: row;
-`;
-
 export const Options = styled.ul`
   position: absolute;
   top: calc(100% - 2rem);

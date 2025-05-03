@@ -100,11 +100,9 @@ export const SignupPage = () => {
             )
         )}
 
-        <S.ButtonRow>
-          <LoginButton disabled={!isValid} onClick={goToNextStep}>
-            다음
-          </LoginButton>
-        </S.ButtonRow>
+        <LoginButton disabled={!isValid} onClick={goToNextStep}>
+          다음
+        </LoginButton>
       </S.Container>
       {isTermModalOpen && (
         <TermsModal
