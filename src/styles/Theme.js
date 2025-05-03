@@ -70,5 +70,6 @@ export const theme = {
     Caption_Bold_10: fontGenerator('SUIT', '10px', '700'),
     Caption_SemiBold_10: fontGenerator('SUIT', '10px', '600'),
     Caption_Medium_10: fontGenerator('SUIT', '10px', '500'),
+    Caption_Light_10: fontGenerator('SUIT', '10px', '400'),
   },
 };
