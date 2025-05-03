@@ -68,7 +68,7 @@ export const Signupbox = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 60px;
-  transform: translateY(-20px);
+  transform: translateY(-60px);
   gap: 8px;
 
   cursor: pointer;

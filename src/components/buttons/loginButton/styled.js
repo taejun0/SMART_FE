@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   position: absolute;
   width: 100%;
-  bottom: -52px;
+  bottom: 0;
 `;
 
 export const Button = styled.div`
