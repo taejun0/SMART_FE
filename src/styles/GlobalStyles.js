@@ -16,6 +16,10 @@ a {display:flex;text-decoration:none;}
 iframe {overflow:hidden;margin:0;border:0;padding:0;vertical-align:top}
 mark {background-color:transparent}
 i {font-style:normal}
+input::placeholder{
+  ${({ theme }) => theme.fonts.Body_Medium_14};
+  color: ${({ theme }) => theme.colors.gray02};
+}
 
 #root {
 	display: flex;
@@ -113,6 +117,7 @@ body {
 	background-color: ${({ theme }) => theme.colors.white};
 	color: ${({ theme }) => theme.colors.black};
 	font-family: 'SUIT', sans-serif;
+
 }
 
 `;
