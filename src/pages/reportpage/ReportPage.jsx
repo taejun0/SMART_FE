@@ -2,13 +2,13 @@ import * as S from './styled';
 
 import { Footer } from '@components/footer/Footer';
 
-export const MainPage = () => {
+export const ReportPage = () => {
   return (
     <S.Wrapper>
-      메 인 페 이 지
+      리 포 트 페 이 지
       <Footer />
     </S.Wrapper>
   );
 };
 
-export default MainPage;
+export default ReportPage;
