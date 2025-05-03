@@ -9,8 +9,10 @@ export const Wrapper = styled.div`
 export const Container = styled.div`
   position: relative;
   display: flex;
-  padding: 40px;
+  padding: 40px 0;
+  margin: 0px 20px;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 `;
 export const TitleBox = styled.div`
@@ -37,11 +39,4 @@ export const SubTitle = styled.div`
 
 export const Image = styled.img`
   width: 90%;
-`;
-
-export const ButtonRow = styled.div`
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  right: 20px;
 `;

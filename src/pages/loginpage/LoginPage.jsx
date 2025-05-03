@@ -75,11 +75,9 @@ export const LoginPage = () => {
           <S.Sign2>회원가입하기</S.Sign2>
         </S.Signupbox>
 
-        <S.ButtonRow>
-          <LoginButton disabled={!isValid} onClick={onLogin}>
-            {LoginConstants.BUTTON.LOGIN}
-          </LoginButton>
-        </S.ButtonRow>
+        <LoginButton disabled={!isValid} onClick={onLogin}>
+          {LoginConstants.BUTTON.LOGIN}
+        </LoginButton>
       </S.Container>
     </S.Wrapper>
   );

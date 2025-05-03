@@ -85,12 +85,3 @@ export const Sign2 = styled.div`
   ${({ theme }) => theme.fonts.Caption_ExtraBold_12};
   color: ${({ theme }) => theme.colors.green01};
 `;
-
-export const ButtonRow = styled.div`
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  right: 20px;
-  display: flex;
-  flex-direction: row;
-`;

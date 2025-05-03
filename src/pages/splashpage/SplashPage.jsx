@@ -21,10 +21,8 @@ export const SplashPage = () => {
           </S.SubTitle>
         </S.TitleBox>
         <S.Image src={IMAGE_CONSTANTS.SOLDIER_SPLASH} />
-      </S.Container>
-      <S.ButtonRow>
         <StartButton />
-      </S.ButtonRow>
+      </S.Container>
     </S.Wrapper>
   );
 };
