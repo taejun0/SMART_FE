@@ -12,6 +12,7 @@ export const LoginInput = ({
   readOnly,
   onClick,
   children,
+  error,
 }) => {
   const isPassword = type === 'password';
 
@@ -26,6 +27,7 @@ export const LoginInput = ({
           onChange={(e) => onChange(e.target.value)}
           readOnly={readOnly}
         />
+        {error && <>에러</>}
         {isPassword && value && (
           <S.EyeIcon src={eyeIconSrc} onClick={togglePassword} />
         )}
