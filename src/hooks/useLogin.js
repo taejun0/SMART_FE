@@ -35,7 +35,13 @@ export const useLogin = () => {
 
   const onLogin = async () => {
     try {
-      await AuthService.login({ militaryId, password });
+      const loginApi =
+        selectedRole === '간부'
+          ? AuthService.loginOfficer
+          : AuthService.loginSoldier;
+
+      const response = await loginApi({ militaryId, password });
+
       navigate(ROUTE_PATHS.MAIN);
     } catch (err) {
       alert('로그인에 실패했습니다.');
