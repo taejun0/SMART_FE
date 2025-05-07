@@ -7,6 +7,8 @@ import { ROUTE_PATHS } from '@constants/routeConstants';
 import { SIGNUP_CONSTANTS } from '@constants/signupConstants';
 import { IMAGE_CONSTANTS } from '@constants/imageConstants';
 
+import { isValidPassword } from '@utils/loginValidation';
+
 export const useSignup = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
@@ -44,6 +46,8 @@ export const useSignup = () => {
 
   const fields = values.map((val, index) => {
     const isSelect = SIGNUP_CONSTANTS.OPTIONS[index] !== undefined;
+    const isPassword = index === 7;
+    const isConfirmPassword = index === 8;
 
     return {
       title:
@@ -65,21 +69,30 @@ export const useSignup = () => {
       },
       toggleDropdown: () => toggleDropdown(index),
       closeDropdown: () => closeDropdown(index),
+      showPassword: isPassword
+        ? showPassword
+        : isConfirmPassword
+        ? showConfirmPassword
+        : undefined,
+      togglePassword: isPassword
+        ? () => setShowPassword((prev) => !prev)
+        : isConfirmPassword
+        ? () => setShowConfirmPassword((prev) => !prev)
+        : undefined,
+      eyeIconSrc: isPassword
+        ? showPassword
+          ? IMAGE_CONSTANTS.EYE
+          : IMAGE_CONSTANTS.TEXTHOLDER
+        : isConfirmPassword
+        ? showConfirmPassword
+          ? IMAGE_CONSTANTS.EYE
+          : IMAGE_CONSTANTS.TEXTHOLDER
+        : null,
+      error: isPassword && step === 7 ? !isValidPassword : false,
     };
   });
 
   const currentTitle = fields[step].title;
-
-  const eyeIconSrc =
-    step === 7
-      ? showPassword
-        ? IMAGE_CONSTANTS.EYE
-        : IMAGE_CONSTANTS.TEXTHOLDER
-      : step === 8
-      ? showConfirmPassword
-        ? IMAGE_CONSTANTS.EYE
-        : IMAGE_CONSTANTS.TEXTHOLDER
-      : null;
 
   const submitSignup = async () => {
     const signupData = {
@@ -109,14 +122,13 @@ export const useSignup = () => {
     setShowPassword,
     showConfirmPassword,
     setShowConfirmPassword,
-    eyeIconSrc,
     isTermModalOpen,
     setIsTermModalOpen,
     submitSignup,
     goToNextStep: () => {
       closeAllDropdowns();
       if (step < 8) setStep(step + 1);
-      if (step == 8) setIsTermModalOpen(true);
+      if (step === 8) setIsTermModalOpen(true);
     },
     goToPrevStep: () => {
       closeAllDropdowns();
@@ -124,8 +136,10 @@ export const useSignup = () => {
     },
     closeAllDropdowns,
     isValid:
-      step === 8
-        ? values[7] === values[8] && values[7].trim() !== ''
+      step === 7
+        ? isValidPassword(values[7])
+        : step === 8
+        ? values[7] === values[8] && isValidPassword(values[7])
         : values[step].trim() !== '',
   };
 };

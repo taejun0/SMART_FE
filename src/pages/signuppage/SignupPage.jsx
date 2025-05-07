@@ -17,15 +17,11 @@ export const SignupPage = () => {
     goToNextStep,
     isValid,
     closeAllDropdowns,
-    showPassword,
-    setShowPassword,
-    showConfirmPassword,
-    setShowConfirmPassword,
-    eyeIconSrc,
     isTermModalOpen,
     setIsTermModalOpen,
     submitSignup,
   } = useSignup();
+
   return (
     <S.Wrapper>
       <S.Container>
@@ -53,6 +49,10 @@ export const SignupPage = () => {
               isDropdownOpen,
               toggleDropdown,
               closeDropdown,
+              showPassword,
+              togglePassword,
+              eyeIconSrc,
+              error,
             },
             i
           ) =>
@@ -66,19 +66,10 @@ export const SignupPage = () => {
                   onChange={onChange}
                   readOnly={readOnly}
                   onClick={type === 'select' ? toggleDropdown : undefined}
-                  showPassword={
-                    step === 7
-                      ? showPassword
-                      : step === 8
-                      ? showConfirmPassword
-                      : false
-                  }
-                  togglePassword={
-                    step === 7
-                      ? () => setShowPassword((prev) => !prev)
-                      : () => setShowConfirmPassword((prev) => !prev)
-                  }
+                  showPassword={showPassword}
+                  togglePassword={togglePassword}
                   eyeIconSrc={eyeIconSrc}
+                  error={error}
                 />
 
                 {type === 'select' && isDropdownOpen && (
@@ -87,8 +78,8 @@ export const SignupPage = () => {
                       <S.Option
                         key={opt}
                         onClick={() => {
-                          onChange(opt); // 값 설정
-                          closeDropdown(); // 창 닫기
+                          onChange(opt);
+                          closeDropdown();
                         }}
                       >
                         {opt}

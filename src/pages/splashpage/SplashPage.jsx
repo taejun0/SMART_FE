@@ -1,6 +1,6 @@
 import * as S from './styled';
 
-import { IMAGE_CONSTANTS } from '@constants/imageConstants';
+import { SPLASH_CONSTANTS } from '@constants/splashConstants';
 import StartButton from '@components/buttons/startButton/StartButton';
 
 export const SplashPage = () => {
@@ -8,7 +8,7 @@ export const SplashPage = () => {
     <S.Wrapper>
       <S.Container>
         <S.TitleBox>
-          <S.Title>반가워요!</S.Title>
+          <S.Title>{SPLASH_CONSTANTS.Title}</S.Title>
           <S.SubTitle>
             {'이제부터 SMART와 함께\n스마트한 군생활을 시작해봐요.'
               .split('\n')
@@ -20,7 +20,7 @@ export const SplashPage = () => {
               ))}
           </S.SubTitle>
         </S.TitleBox>
-        <S.Image src={IMAGE_CONSTANTS.SOLDIER_SPLASH} />
+        <S.Image src={SPLASH_CONSTANTS.IMGAE} />
         <StartButton />
       </S.Container>
     </S.Wrapper>

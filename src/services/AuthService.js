@@ -1,15 +1,23 @@
 const AuthService = {
-  login: async ({ militaryId, password }) => {
-    console.log('[MOCK LOGIN]', { militaryId, password });
-
-    // 로그인 성공한 것처럼 응답
+  loginSoldier: async ({ militaryId, password }) => {
+    console.log('[MOCK SOLDIER LOGIN]', { militaryId, password });
     return {
       success: true,
-      message: '로그인 성공',
-      token: 'mock-jwt-token',
+      message: '병사 로그인 성공',
+      token: 'mock-soldier-jwt-token',
     };
   },
 
+  loginOfficer: async ({ militaryId, password }) => {
+    console.log('[MOCK OFFICER LOGIN]', { militaryId, password });
+    return {
+      success: true,
+      message: '간부 로그인 성공',
+      token: 'mock-officer-jwt-token',
+    };
+  },
+
+  // 기존 회원가입 유지
   signup: async ({
     name,
     branch,
@@ -30,7 +38,6 @@ const AuthService = {
       militaryId,
       password,
     });
-
     return {
       success: true,
       message: '회원가입 성공',

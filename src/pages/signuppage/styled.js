@@ -56,15 +56,15 @@ export const Options = styled.ul`
 `;
 
 export const Option = styled.li`
-  padding: 16px 8px;
-  width: 90%;
+  padding: 16px 24px;
+  width: 100%;
   cursor: pointer;
   ${({ theme }) => theme.fonts.Subtitle_Bold_16};
+  border: 1px solid ${({ theme }) => theme.colors.beige01};
   color: ${({ theme }) => theme.colors.green01};
 
   &:hover {
     width: 100%;
-    padding: 16px 24px;
     border: 1px solid ${({ theme }) => theme.colors.brown04};
     border-radius: 15px;
     background: rgba(187, 191, 154, 0.5);
