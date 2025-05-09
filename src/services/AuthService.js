@@ -51,6 +51,7 @@ const AuthService = {
       company: '17중대',
       platoon: '화기소개',
       rank: '병장',
+      level: '1',
     };
   },
 };
