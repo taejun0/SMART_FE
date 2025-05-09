@@ -18,7 +18,11 @@ export const MainPage = () => {
     );
   return (
     <S.Wrapper>
-      {userInfo.role === '병사' ? <SoldierMain /> : <OfficerMain />}
+      {userInfo.role === '병사' ? (
+        <SoldierMain userInfo={userInfo} />
+      ) : (
+        <OfficerMain userInfo={userInfo} />
+      )}
       <Footer />
     </S.Wrapper>
   );

@@ -1,12 +1,39 @@
-import * as S from './styled';
+import * as S from './styledSol';
 
-import { Footer } from '@components/footer/Footer';
+import { useNavigate } from 'react-router-dom';
 
-export const SoldierMain = () => {
+import { useMain } from '@hooks/useMain';
+import { MAINSOLCONSTANTS } from '@constants/mainSolConstants';
+
+export const SoldierMain = ({ userInfo }) => {
+  const { medalImage } = useMain();
+  const navigate = useNavigate();
   return (
     <S.Wrapper>
-      병 인 페 이 지
-      <Footer />
+      <S.Contatiner>
+        <S.InfoContainer>
+          <S.Info>
+            <S.InfoIMG src={medalImage} />
+            {userInfo.rank}
+            <S.VerLine />
+            {userInfo.name}
+          </S.Info>
+          <S.Saying>{MAINSOLCONSTANTS.Text.main_Text}</S.Saying>
+          <S.Goal>{MAINSOLCONSTANTS.Text.goal}</S.Goal>
+          <S.soldier src={MAINSOLCONSTANTS.Images.soldier} />
+        </S.InfoContainer>
+        <S.DataInfo>
+          <S.SemiTitleBox>
+            <S.SemiTitle>{MAINSOLCONSTANTS.SemiTitle.SemiTItle1}</S.SemiTitle>
+            <S.PlusButton onClick={() => navigate('feedback')}>
+              {MAINSOLCONSTANTS.SemiTitle.plus}
+            </S.PlusButton>
+          </S.SemiTitleBox>
+
+          <S.SemiTitle>{MAINSOLCONSTANTS.SemiTitle.SemiTitle2}</S.SemiTitle>
+          <S.SemiTitle>{MAINSOLCONSTANTS.SemiTitle.SemiTitle3}</S.SemiTitle>
+        </S.DataInfo>
+      </S.Contatiner>
     </S.Wrapper>
   );
 };
