@@ -5,6 +5,7 @@ export const ROUTE_PATHS = {
   SPLASH: '/splash',
   TRAINING: '/training',
   FEEDBACK: '/feedback',
+  ANALYZE: '/analyze/:type',
   MYREPORT: '/myreport',
   NOT_FOUND: '*',
 };

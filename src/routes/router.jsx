@@ -11,6 +11,7 @@ import { SignupPage } from '@pages/signuppage/SignupPage';
 import { SplashPage } from '@pages/splashpage/SplashPage';
 import { TrainingPage } from '@pages/trainingpage/TrainingPage';
 import { FeedbackPage } from '@pages/feedbackpage/FeedbackPage';
+import { AnalyzePage } from '@pages/analyzepage/AnalyzePage';
 import { ReportPage } from '@pages/reportpage/ReportPage';
 import { NotFound } from '@pages/notfound/NotFound';
 
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: ROUTE_PATHS.FEEDBACK,
         element: <FeedbackPage />,
+      },
+      {
+        path: ROUTE_PATHS.ANALYZE,
+        element: <AnalyzePage />,
       },
       {
         path: ROUTE_PATHS.MYREPORT,

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   position: relative;
-  min-height: calc(100vh - 78px);
+  min-height: 100vh;
   width: 100%;
 `;
 
@@ -65,6 +65,7 @@ export const DataInfo = styled.div`
   min-height: 100%;
   width: 100%;
   padding: 2rem;
+  gap: 1.5rem;
   display: flex;
   flex-direction: column;
   background-color: ${({ theme }) => theme.colors.beige01};
@@ -89,4 +90,11 @@ export const PlusButton = styled.div`
   ${({ theme }) => theme.fonts.Caption_Medium_12};
   color: rgba(138, 138, 138, 0.6);
   cursor: pointer;
+`;
+
+export const RowBet = styled.div`
+  gap: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
