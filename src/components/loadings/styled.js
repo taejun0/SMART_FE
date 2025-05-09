@@ -1,8 +1,8 @@
 import styled, { keyframes } from 'styled-components';
 
 const rotate = keyframes`
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
+  0% { transform: rotate(360deg); }
 `;
 
 export const Wrapper = styled.div`
@@ -20,7 +20,7 @@ export const Image = styled.img`
 
 export const ClipWrap = styled.div`
   width: 134px;
-  height: 113px;
+  height: 112px;
   animation: ${rotate} 1s linear infinite;
   transform-origin: center;
 `;
