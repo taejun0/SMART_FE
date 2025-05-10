@@ -2,14 +2,14 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   position: relative;
-  min-height: 100%;
+  min-height: calc(100vh - 2rem);
   width: 100%;
 `;
 
 export const Container = styled.div`
   position: relative;
   display: flex;
-  margin: 40px 20px;
+  margin: 2rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;

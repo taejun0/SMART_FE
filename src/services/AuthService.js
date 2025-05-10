@@ -17,7 +17,6 @@ const AuthService = {
     };
   },
 
-  // 기존 회원가입 유지
   signup: async ({
     name,
     branch,
@@ -41,6 +40,18 @@ const AuthService = {
     return {
       success: true,
       message: '회원가입 성공',
+    };
+  },
+  getUserInfo: async () => {
+    return {
+      role: '병사',
+      name: '오태준',
+      branch: '박격포병',
+      unit: '31사단 93여단',
+      company: '17중대',
+      platoon: '화기소개',
+      rank: '병장',
+      level: '1',
     };
   },
 };

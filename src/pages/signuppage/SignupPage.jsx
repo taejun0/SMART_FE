@@ -92,7 +92,7 @@ export const SignupPage = () => {
         )}
 
         <LoginButton disabled={!isValid} onClick={goToNextStep}>
-          다음
+          {SIGNUP_CONSTANTS.Text.next}
         </LoginButton>
       </S.Container>
       {isTermModalOpen && (

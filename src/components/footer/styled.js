@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
+  max-width: 540px;
   height: 78px;
   background-color: ${({ theme }) => theme.colors.beige01};
   box-shadow: 0px -6px 14px 0px rgba(47, 47, 47, 0.06);
