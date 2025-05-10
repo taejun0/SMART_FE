@@ -18,72 +18,43 @@ const TrainingService = {
       },
     ];
   },
-  getHistory: async () => {
+  getPushupHistory: async () => {
     return [
-      {
-        year: 2025,
-        month: 1,
-        pushup: 40,
-        situp: 40,
-        running: 10,
-      },
-      {
-        year: 2025,
-        month: 2,
-        pushup: 42,
-        situp: 41,
-        running: 10.2,
-      },
-      {
-        year: 2025,
-        month: 3,
-        pushup: 43,
-        situp: 42,
-        running: 10.5,
-      },
-      {
-        year: 2025,
-        month: 4,
-        pushup: 45,
-        situp: 43,
-        running: 10.8,
-      },
-      {
-        year: 2025,
-        month: 5,
-        pushup: 47,
-        situp: 44,
-        running: 11,
-      },
+      { year: 2025, month: 1, value: 65, mockValue: 60 }, // 1급
+      { year: 2025, month: 2, value: 72, mockValue: 66 }, // 특급
+      { year: 2025, month: 3, value: 48, mockValue: 52 }, // 3급
+      { year: 2025, month: 4, value: 40, mockValue: 60 }, // 불합격
+      { year: 2025, month: 5, value: 56, mockValue: 45 }, // 2급
     ];
   },
+
+  getSitupHistory: async () => {
+    return [
+      { year: 2025, month: 1, value: 80, mockValue: 72 }, // 특급
+      { year: 2025, month: 2, value: 62, mockValue: 60 }, // 3급
+      { year: 2025, month: 3, value: 68, mockValue: 66 }, // 2급
+      { year: 2025, month: 4, value: 75, mockValue: 78 }, // 1급
+      { year: 2025, month: 5, value: 50, mockValue: 56 }, // 불합격
+    ];
+  },
+
+  getRunningHistory: async () => {
+    return [
+      { year: 2025, month: 1, value: 12.3, mockValue: 13.5 }, // 특급 vs 1급
+      { year: 2025, month: 2, value: 14.8, mockValue: 14.2 }, // 2급
+      { year: 2025, month: 3, value: 15.3, mockValue: 13.8 }, // 3급 vs 1급
+      { year: 2025, month: 4, value: 16.5, mockValue: 16.2 }, // 불합격
+      { year: 2025, month: 5, value: 12.5, mockValue: 12.7 }, // 특급 경계
+    ];
+  },
+
   getShootingHistory: async () => {
     return [
-      {
-        year: 2025,
-        month: 1,
-        score: 10,
-      },
-      {
-        year: 2025,
-        month: 2,
-        score: 20,
-      },
-      {
-        year: 2025,
-        month: 3,
-        score: 16,
-      },
-      {
-        year: 2025,
-        month: 4,
-        score: 19,
-      },
-      {
-        year: 2025,
-        month: 5,
-        score: 9,
-      },
+      { year: 2025, month: 1, value: 18 }, // 특급
+      { year: 2025, month: 2, value: 16 }, // 1급
+      { year: 2025, month: 3, value: 14 }, // 2급
+      { year: 2025, month: 4, value: 10 }, // 불합격
+      { year: 2025, month: 5, value: 12 }, // 3급
     ];
   },
 };

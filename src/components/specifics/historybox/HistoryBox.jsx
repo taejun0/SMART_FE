@@ -17,3 +17,4 @@ export const HistoryBox = ({ text, image, detail, arrow, onClick }) => {
     </S.Wrapper>
   );
 };
+export default HistoryBox;

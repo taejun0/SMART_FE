@@ -6,9 +6,18 @@ import { useMain } from '@hooks/useMain';
 import { MAINSOLCONSTANTS } from '@constants/mainSolConstants';
 import FeedbackCarousal from '@components/specifics/feedbackcarousal/FeedbackCarousal';
 import { HistoryBox } from '@components/specifics/historybox/HistoryBox';
+import Graph from '@components/specifics/graph/Graph';
 
 export const SoldierMain = ({ userInfo }) => {
-  const { medalImage, feedbackList } = useMain();
+  const {
+    medalImage,
+    feedbackList,
+    pushupHistory,
+    situpHistory,
+    runningHistory,
+    shootingHistory,
+    grades,
+  } = useMain();
   const navigate = useNavigate();
   return (
     <S.Wrapper>
@@ -49,6 +58,37 @@ export const SoldierMain = ({ userInfo }) => {
           </S.RowBet>
 
           <S.SemiTitle>{MAINSOLCONSTANTS.SemiTitle.SemiTitle3}</S.SemiTitle>
+          <Graph
+            title={MAINSOLCONSTANTS.Text.pushup}
+            unit="회"
+            data={pushupHistory}
+            yDomain={[0, 100]}
+            grade={grades.pushup}
+          />
+
+          <Graph
+            title={MAINSOLCONSTANTS.Text.situp}
+            unit="회"
+            data={situpHistory}
+            yDomain={[0, 100]}
+            grade={grades.situp}
+          />
+
+          <Graph
+            title={MAINSOLCONSTANTS.Text.running}
+            unit="분"
+            data={runningHistory}
+            yDomain={[10, 20]}
+            grade={grades.running}
+          />
+
+          <Graph
+            title={MAINSOLCONSTANTS.Text.shooting}
+            unit="점"
+            data={shootingHistory}
+            yDomain={[0, 20]}
+            grade={grades.shooting}
+          />
         </S.DataInfo>
       </S.Contatiner>
     </S.Wrapper>
