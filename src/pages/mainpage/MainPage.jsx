@@ -4,7 +4,7 @@ import { Footer } from '@components/footer/Footer';
 import { useMain } from '@hooks/useMain';
 import SoldierMain from './SoldierMain';
 import OfficerMain from './OfficerMain';
-import { CommonLoading } from '@components/loadings/commonLoading';
+import { CommonLoading } from '@components/loadings/CommonLoading';
 
 export const MainPage = () => {
   const { userInfo, loading } = useMain();

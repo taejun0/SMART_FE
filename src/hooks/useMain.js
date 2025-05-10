@@ -28,11 +28,13 @@ export const useMain = () => {
             : MAINSOLCONSTANTS.Images.medal1
         );
 
+        const feedback = await TrainingService.getFeedback();
         const pushup = await TrainingService.getPushupHistory();
         const situp = await TrainingService.getSitupHistory();
         const running = await TrainingService.getRunningHistory();
         const shooting = await TrainingService.getShootingHistory();
 
+        setFeedbackList(feedback);
         setPushupHistory(pushup);
         setSitupHistory(situp);
         setRunningHistory(running);
