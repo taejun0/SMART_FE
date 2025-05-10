@@ -8,6 +8,11 @@ import 'swiper/css/pagination';
 import { MAINSOLCONSTANTS } from '@constants/mainSolConstants';
 
 export const FeedbackCarousal = ({ feedbackList }) => {
+  const sortedFeedback = [...feedbackList].sort(
+    (a, b) => new Date(b.date) - new Date(a.date)
+  );
+
+  const latestThree = sortedFeedback.slice(0, 3);
   return (
     <S.Wrapper>
       <Swiper
@@ -18,7 +23,7 @@ export const FeedbackCarousal = ({ feedbackList }) => {
         centeredSlides={true}
         loop
       >
-        {feedbackList.map((item, idx) => (
+        {latestThree.map((item, idx) => (
           <SwiperSlide key={idx}>
             <S.Card>
               <S.Image src={MAINSOLCONSTANTS.Images.soldier_Smile} />
