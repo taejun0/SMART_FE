@@ -21,6 +21,10 @@ input::placeholder{
   color: ${({ theme }) => theme.colors.gray02};
 }
 
+:root {
+    --vh: 100%;
+}
+
 #root {
 	display: flex;
 	flex-direction: column;
