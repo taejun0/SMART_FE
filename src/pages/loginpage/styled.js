@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
 export const Container = styled.div`
   position: relative;
   display: flex;
-  margin: 2rem;
+  padding: 2rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;

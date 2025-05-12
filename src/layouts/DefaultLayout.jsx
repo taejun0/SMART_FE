@@ -14,5 +14,5 @@ export const DefaultLayout = () => {
 const Wrapper = styled.section`
   flex-grow: 1;
   background-color: ${({ theme }) => theme.colors.beige01};
-  min-height: 100vh;
+  min-height: calc(var(--vh) * 100);
 `;
