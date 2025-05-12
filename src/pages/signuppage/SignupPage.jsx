@@ -25,15 +25,15 @@ export const SignupPage = () => {
   return (
     <S.Wrapper>
       <S.Container>
-        <S.XImage
-          src={SIGNUP_CONSTANTS.IMGAE.X}
-          onClick={() => {
-            closeAllDropdowns();
-            navigate(ROUTE_PATHS.LOGIN);
-          }}
-        />
         <S.TitleBox>
           <S.Title>{currentTitle}</S.Title>
+          <S.XImage
+            src={SIGNUP_CONSTANTS.IMGAE.X}
+            onClick={() => {
+              closeAllDropdowns();
+              navigate(ROUTE_PATHS.LOGIN);
+            }}
+          />
         </S.TitleBox>
         {fields.reverse().map(
           (

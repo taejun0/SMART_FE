@@ -28,6 +28,7 @@ export const StepBlock = styled.div`
 `;
 
 export const TitleBox = styled.div`
+  position: relative;
   width: 100%;
   display: flex;
   flex-direction: column;
