@@ -22,14 +22,14 @@ input::placeholder{
 }
 
 :root {
-    --vh: 100%;
+  --vh: 100%;
 }
 
 #root {
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
-	min-height: 100vh;
+  min-height: calc(var(--vh) * 100);
 }
 
 // 폰트 설정
