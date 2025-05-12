@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   position: relative;
-  min-height: calc(var(--vh, 1vh) * 100 - 4rem);
+  min-height: calc(var(--vh, 1vh) * 100);
   width: 100%;
 `;
 
@@ -64,13 +64,9 @@ export const Image = styled.img`
 `;
 
 export const Signupbox = styled.div`
-  position: fixed;
-  bottom: 20px;
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 60px;
-  transform: translateY(-60px);
   gap: 8px;
 
   cursor: pointer;
