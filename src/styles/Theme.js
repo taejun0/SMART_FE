@@ -34,6 +34,7 @@ export const theme = {
     black02: '#2A2A2A',
     white: '#FAFAFA',
     white02: '#E7E8EB',
+    font_green: '#254434',
 
     // Ecxeption Case
     gray01: '#8E8E93',
