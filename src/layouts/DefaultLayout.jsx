@@ -12,6 +12,8 @@ export const DefaultLayout = () => {
 };
 
 const Wrapper = styled.section`
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
   background-color: ${({ theme }) => theme.colors.beige01};
   min-height: calc(var(--vh) * 100);
