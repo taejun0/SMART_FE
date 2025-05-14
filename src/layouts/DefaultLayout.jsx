@@ -17,4 +17,5 @@ const Wrapper = styled.section`
   flex-grow: 1;
   background-color: ${({ theme }) => theme.colors.beige01};
   min-height: calc(var(--vh) * 100);
+  min-width: 340px;
 `;
