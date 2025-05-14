@@ -1,4 +1,4 @@
-import * as S from './styled';
+import * as S from './DiffresultBox.styled';
 
 import { useTheme } from 'styled-components';
 

@@ -1,10 +1,10 @@
-import * as S from './styled';
+import * as S from './LoginPage.styled';
 
 import { useNavigate } from 'react-router-dom';
 
 import { ROUTE_PATHS } from '@constants/routeConstants';
-import { LoginConstants } from '@constants/loginConstants';
-import { useLogin } from '@hooks/useLogin';
+import { LoginConstants } from './constants/loginConstants';
+import { useLogin } from './hooks/useLogin';
 import LoginInput from '@components/inputs/loginInput/LoginInput';
 import LoginButton from '@components/buttons/loginButton/LoginButton';
 

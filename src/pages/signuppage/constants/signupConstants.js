@@ -1,4 +1,4 @@
-import { IMAGE_CONSTANTS } from './imageConstants';
+import { IMAGE_CONSTANTS } from '@constants/imageConstants';
 
 export const SIGNUP_CONSTANTS = {
   TITLE_TEXT: {
@@ -37,6 +37,7 @@ export const SIGNUP_CONSTANTS = {
   IMGAE: {
     X: IMAGE_CONSTANTS.X,
     eye: IMAGE_CONSTANTS.EYE,
+    noneye: IMAGE_CONSTANTS.TEXTHOLDER,
   },
   OPTIONS: {
     1: ['육군', '해군', '공군', '해병대'],

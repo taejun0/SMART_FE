@@ -1,10 +1,10 @@
-import * as S from './styled';
+import * as S from './FeedbackPage.styled';
 
 import { useNavigate } from 'react-router-dom';
-import { useFeedback } from '@hooks/useFeedback';
-import { MAINDETAILCONSTANTS } from '@constants/mainDetailConstants';
+import { useFeedback } from './hooks/useFeedback';
+import { FEEDBACKPAGE_CONSTANTS } from './constants/feedbackPageConstants';
 import { ROUTE_PATHS } from '@constants/routeConstants';
-import FeedbackBox from '@components/specifics/feedbackbox/FeedbackBox';
+import FeedbackBox from './components/feedbackbox/FeedbackBox';
 
 export const FeedbackPage = () => {
   const navigate = useNavigate();
@@ -14,9 +14,9 @@ export const FeedbackPage = () => {
     <S.Wrapper>
       <S.Contatiner>
         <S.HeaderBox>
-          <S.Title>{MAINDETAILCONSTANTS.Feedback.TEXT.Title}</S.Title>
+          <S.Title>{FEEDBACKPAGE_CONSTANTS.Feedback.TEXT.Title}</S.Title>
           <S.Image
-            src={MAINDETAILCONSTANTS.Feedback.IMAGE.X}
+            src={FEEDBACKPAGE_CONSTANTS.Feedback.IMAGE.X}
             onClick={() => navigate(ROUTE_PATHS.MAIN)}
           />
         </S.HeaderBox>
@@ -30,7 +30,7 @@ export const FeedbackPage = () => {
 
         {hasMore && (
           <S.Loader ref={loaderRef}>
-            <S.Spinner src={MAINDETAILCONSTANTS.Feedback.IMAGE.Loader} />
+            <S.Spinner src={FEEDBACKPAGE_CONSTANTS.Feedback.IMAGE.Loader} />
           </S.Loader>
         )}
       </S.Contatiner>

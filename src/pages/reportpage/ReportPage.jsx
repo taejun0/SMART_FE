@@ -1,4 +1,4 @@
-import * as S from './styled';
+import * as S from './ReportPage.styled';
 
 import { Footer } from '@components/footer/Footer';
 

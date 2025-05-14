@@ -1,4 +1,4 @@
-import * as S from './styled';
+import * as S from './StartButton.styled';
 
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_PATHS } from '@constants/routeConstants';

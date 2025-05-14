@@ -1,4 +1,4 @@
-import * as S from './styled';
+import * as S from './Footer.styled';
 import { useFooter } from '@hooks/useFooter';
 
 export const Footer = () => {

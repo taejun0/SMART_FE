@@ -10,8 +10,8 @@ import {
 } from 'recharts';
 import { useTheme } from 'styled-components';
 import dayjs from 'dayjs';
-import * as S from './styled';
-import { MAINSOLCONSTANTS } from '@constants/mainSolConstants';
+import * as S from './Graph.styled';
+import { MAINSOLCONSTANTS } from '../../constants/mainSolConstants';
 
 const formatMonth = (year, month) => `${month}월`;
 

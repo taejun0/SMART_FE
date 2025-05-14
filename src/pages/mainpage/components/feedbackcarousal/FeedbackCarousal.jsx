@@ -1,12 +1,11 @@
-import * as S from './styled';
+import * as S from './FeedbackCarousal.styled';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-import { MAINSOLCONSTANTS } from '@constants/mainSolConstants';
-
+import { MAINSOLCONSTANTS } from '../../constants/mainSolConstants';
 export const FeedbackCarousal = ({ feedbackList }) => {
   const sortedFeedback = [...feedbackList].sort(
     (a, b) => new Date(b.date) - new Date(a.date)

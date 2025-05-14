@@ -1,4 +1,4 @@
-import * as S from './styled';
+import * as S from './LoginButton.styled';
 
 const LoginButton = ({ disabled, onClick, children }) => {
   return (

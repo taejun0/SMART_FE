@@ -1,4 +1,4 @@
-import { IMAGE_CONSTANTS } from './imageConstants';
+import { IMAGE_CONSTANTS } from '@constants/imageConstants';
 
 export const MAINSOLCONSTANTS = {
   Images: {

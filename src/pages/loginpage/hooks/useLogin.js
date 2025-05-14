@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import AuthService from '@services/AuthService';
 
+import { LoginConstants } from '../constants/loginConstants';
 import { ROUTE_PATHS } from '@constants/routeConstants';
-import { IMAGE_CONSTANTS } from '@constants/imageConstants';
 
 export const useLogin = () => {
   const navigate = useNavigate();
@@ -30,8 +30,8 @@ export const useLogin = () => {
   const selectRole = (role) => setSelectedRole(role);
 
   const passwordEyeIconSrc = showPassword
-    ? IMAGE_CONSTANTS.EYE
-    : IMAGE_CONSTANTS.TEXTHOLDER;
+    ? LoginConstants.IMAGE.EYE
+    : LoginConstants.IMAGE.NONEYE;
 
   const onLogin = async () => {
     try {

@@ -1,5 +1,5 @@
-import * as S from './styled';
-import { ANALYZECONSTANTS } from '@constants/anaylzeConstants';
+import * as S from './RecentHistory.styled';
+import { ANALYZECONSTANTS } from '../../constants/anaylzeConstants';
 
 export const RecentHistory = ({ type, data }) => {
   return (

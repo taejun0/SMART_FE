@@ -1,4 +1,4 @@
-import * as S from './styled';
+import * as S from './TermsModal.styled';
 
 import { useState } from 'react';
 

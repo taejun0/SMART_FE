@@ -1,6 +1,6 @@
-import { IMAGE_CONSTANTS } from './imageConstants';
+import { IMAGE_CONSTANTS } from '@constants/imageConstants';
 
-export const MAINDETAILCONSTANTS = {
+export const FEEDBACKPAGE_CONSTANTS = {
   Feedback: {
     IMAGE: {
       SOLDIER_SMILE_POSE: IMAGE_CONSTANTS.SOLDIER_SMILE_POSE,

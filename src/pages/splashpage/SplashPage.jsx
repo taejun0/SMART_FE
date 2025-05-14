@@ -1,6 +1,6 @@
-import * as S from './styled';
+import * as S from './SplashPage.styled';
 
-import { SPLASH_CONSTANTS } from '@constants/splashConstants';
+import { SPLASH_CONSTANTS } from './constants/splashConstants';
 import StartButton from '@components/buttons/startButton/StartButton';
 
 export const SplashPage = () => {
