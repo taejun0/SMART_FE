@@ -1,5 +1,4 @@
-import * as S from './styled';
-import { MoonLoader } from 'react-spinners';
+import * as S from './CommonLoading.styled';
 import { IMAGE_CONSTANTS } from '@constants/imageConstants';
 
 export const CommonLoading = () => {

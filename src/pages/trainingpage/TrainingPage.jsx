@@ -1,4 +1,4 @@
-import * as S from './styled';
+import * as S from './TrainingPage.styled';
 
 import { Footer } from '@components/footer/Footer';
 

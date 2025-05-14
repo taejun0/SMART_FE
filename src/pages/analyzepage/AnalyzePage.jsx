@@ -1,12 +1,12 @@
-import * as S from './styled';
-import { useAnalyze } from '@hooks/useAnalyze';
+import * as S from './AnalyzePage.styled';
+import { useAnalyze } from './hooks/useAnalyze';
 import { useNavigate } from 'react-router-dom';
 
-import FeedbackBoxContainer from '@components/specifics/feedbackcontainer/FeedbackContainer';
-import DiffResultBox from '@components/specifics/diffresultbox/DiffresultBox';
-import RecentHistory from '@components/specifics/recenthistory/RecentHistory';
+import FeedbackBoxContainer from './components/feedbackcontainer/FeedbackContainer';
+import DiffResultBox from './components/diffresultbox/DiffresultBox';
+import RecentHistory from './components/recenthistory/RecentHistory';
 
-import { ANALYZECONSTANTS } from '@constants/anaylzeConstants';
+import { ANALYZECONSTANTS } from './constants/anaylzeConstants';
 import { ROUTE_PATHS } from '@constants/routeConstants';
 
 export const AnalyzePage = () => {

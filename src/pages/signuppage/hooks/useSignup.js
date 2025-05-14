@@ -4,8 +4,7 @@ import AuthService from '@services/AuthService';
 import { useNavigate } from 'react-router-dom';
 
 import { ROUTE_PATHS } from '@constants/routeConstants';
-import { SIGNUP_CONSTANTS } from '@constants/signupConstants';
-import { IMAGE_CONSTANTS } from '@constants/imageConstants';
+import { SIGNUP_CONSTANTS } from '../constants/signupConstants';
 
 import { isValidPassword } from '@utils/loginValidation';
 
@@ -81,12 +80,12 @@ export const useSignup = () => {
         : undefined,
       eyeIconSrc: isPassword
         ? showPassword
-          ? IMAGE_CONSTANTS.EYE
-          : IMAGE_CONSTANTS.TEXTHOLDER
+          ? SIGNUP_CONSTANTS.IMGAE.eye
+          : SIGNUP_CONSTANTS.IMGAE.noneye
         : isConfirmPassword
         ? showConfirmPassword
-          ? IMAGE_CONSTANTS.EYE
-          : IMAGE_CONSTANTS.TEXTHOLDER
+          ? SIGNUP_CONSTANTS.IMGAE.eye
+          : SIGNUP_CONSTANTS.IMGAE.noneye
         : null,
       error: isPassword && step === 7 ? !isValidPassword : false,
     };

@@ -1,9 +1,9 @@
-import * as S from './styled';
+import * as S from './SignupPage.styled';
 import { useNavigate } from 'react-router-dom';
 
-import { useSignup } from '@hooks/useSignup';
+import { useSignup } from './hooks/useSignup';
 import { ROUTE_PATHS } from '@constants/routeConstants';
-import { SIGNUP_CONSTANTS } from '@constants/signupConstants';
+import { SIGNUP_CONSTANTS } from './constants/signupConstants';
 import LoginInput from '@components/inputs/loginInput/LoginInput';
 import LoginButton from '@components/buttons/loginButton/LoginButton';
 import TermsModal from '@components/modals/TermsModal';

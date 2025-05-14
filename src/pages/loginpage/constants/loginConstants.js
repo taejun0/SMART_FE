@@ -1,8 +1,10 @@
-import { IMAGE_CONSTANTS } from './imageConstants';
+import { IMAGE_CONSTANTS } from '@constants/imageConstants';
 
 export const LoginConstants = {
   IMAGE: {
     SOLDIER_MAIN: IMAGE_CONSTANTS.SOLDIER_MAIN,
+    EYE: IMAGE_CONSTANTS.EYE,
+    NONEYE: IMAGE_CONSTANTS.TEXTHOLDER,
   },
   TEXT: {
     TITLE: 'SMART',

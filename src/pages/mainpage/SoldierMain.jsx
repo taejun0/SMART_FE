@@ -1,12 +1,12 @@
-import * as S from './styledSol';
+import * as S from './SoldierMain.styled';
 
 import { useNavigate } from 'react-router-dom';
 
-import { useMain } from '@hooks/useMain';
-import { MAINSOLCONSTANTS } from '@constants/mainSolConstants';
-import FeedbackCarousal from '@components/specifics/feedbackcarousal/FeedbackCarousal';
-import { HistoryBox } from '@components/specifics/historybox/HistoryBox';
-import Graph from '@components/specifics/graph/Graph';
+import { useMain } from './hooks/useMain';
+import { MAINSOLCONSTANTS } from './constants/mainSolConstants';
+import FeedbackCarousal from './components/feedbackcarousal/FeedbackCarousal';
+import HistoryBox from './components/historybox/HistoryBox';
+import Graph from './components/graph/Graph';
 
 export const SoldierMain = ({ userInfo }) => {
   const {

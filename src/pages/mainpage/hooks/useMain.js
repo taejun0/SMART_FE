@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import AuthService from '@services/AuthService';
 import TrainingService from '@services/TrainingService';
-import { MAINSOLCONSTANTS } from '@constants/mainSolConstants';
+import { MAINSOLCONSTANTS } from '../constants/mainSolConstants';
 
 export const useMain = () => {
   const [userInfo, setUserInfo] = useState(null);

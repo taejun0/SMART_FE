@@ -1,4 +1,4 @@
-import { IMAGE_CONSTANTS } from './imageConstants';
+import { IMAGE_CONSTANTS } from '@constants/imageConstants';
 
 export const ANALYZECONSTANTS = {
   Header: {
@@ -40,5 +40,13 @@ export const ANALYZECONSTANTS = {
   GoTOTRAIN: '훈련하러 가기',
   Image: {
     Arrow: IMAGE_CONSTANTS.ARROW,
+  },
+  Feedbackboxcontainer: {
+    Image: {
+      SOLDIER_SMILE_POSE: IMAGE_CONSTANTS.SOLDIER_SMILE_POSE,
+    },
+    TEXT: {
+      TITLE: 'SMART한 훈련 피드백',
+    },
   },
 };

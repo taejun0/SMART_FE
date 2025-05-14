@@ -1,4 +1,4 @@
-import * as S from './styeld';
+import * as S from './HistoryBox.styeld';
 
 import { useNavigate } from 'react-router-dom';
 
