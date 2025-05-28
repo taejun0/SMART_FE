@@ -4,7 +4,6 @@ import { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import PoseTrainer from './components/posttrainer/PoseTrainer';
 import DetailBox from './components/detailbox/DetailBox';
 import TrainingTabs from './components/selecttap/SelectTap';
 import { Footer } from '@components/footer/Footer';
