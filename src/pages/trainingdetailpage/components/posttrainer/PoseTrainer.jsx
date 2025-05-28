@@ -6,6 +6,8 @@ import { Camera } from '@mediapipe/camera_utils';
 
 import { ROUTE_PATHS } from '@constants/routeConstants';
 
+import useTrainingStore from '@stores/trainingStore';
+
 const calculateAngle = (a, b, c) => {
   const radians =
     Math.atan2(c[1] - b[1], c[0] - b[0]) - Math.atan2(a[1] - b[1], a[0] - b[0]);
@@ -15,6 +17,7 @@ const calculateAngle = (a, b, c) => {
 };
 
 const PoseTrainer = () => {
+  const { addFeedback, incrementCount } = useTrainingStore();
   const navigate = useNavigate();
   const [started, setStarted] = useState(false);
   const videoRef = useRef(null);
@@ -133,6 +136,8 @@ const PoseTrainer = () => {
           setCounter((prev) => prev + 1);
           setFeedback('Count! 아주 정확한 자세에요.');
           speak('Count! 아주 정확한 자세에요.');
+          incrementCount();
+          addFeedback('정확한 자세에요!');
         } else if (
           angle >= 90 &&
           angle <= 160 &&

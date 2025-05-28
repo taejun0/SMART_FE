@@ -9,10 +9,6 @@ export const TrainingDetailPage = () => {
   return (
     <S.Wrapper>
       <S.Contatiner>
-        <h1>
-          {mode} - {type} 상세 페이지
-        </h1>
-
         {type === 'pushup' ? (
           <>
             <PoseTrainer />
