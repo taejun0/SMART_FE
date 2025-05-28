@@ -11,6 +11,7 @@ import { SignupPage } from '@pages/signuppage/SignupPage';
 import { SplashPage } from '@pages/splashpage/SplashPage';
 import { TrainingPage } from '@pages/trainingpage/TrainingPage';
 import { TrainingDetailPage } from '@pages/trainingdetailpage/TrainingDetailPage';
+import { TrainingFinishPage } from '@pages/trainingfinishpage/TrainingFinishPage';
 import { FeedbackPage } from '@pages/feedbackpage/FeedbackPage';
 import { AnalyzePage } from '@pages/analyzepage/AnalyzePage';
 import { ReportPage } from '@pages/reportpage/ReportPage';
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: ROUTE_PATHS.TRAINING_DETAIL,
         element: <TrainingDetailPage />,
+      },
+      {
+        path: ROUTE_PATHS.TRAINING_FINISH,
+        element: <TrainingFinishPage />,
       },
       {
         path: ROUTE_PATHS.FEEDBACK,

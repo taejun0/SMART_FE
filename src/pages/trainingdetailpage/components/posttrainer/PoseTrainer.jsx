@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { Pose } from '@mediapipe/pose';
 import { Camera } from '@mediapipe/camera_utils';
 
+import { ROUTE_PATHS } from '@constants/routeConstants';
+
 const calculateAngle = (a, b, c) => {
   const radians =
     Math.atan2(c[1] - b[1], c[0] - b[0]) - Math.atan2(a[1] - b[1], a[0] - b[0]);
@@ -30,7 +32,7 @@ const PoseTrainer = () => {
   const handleConfirmExit = () => {
     setStarted(false);
     setShowExitModal(false);
-    navigate('/program/finish');
+    navigate(ROUTE_PATHS.TRAINING_FINISH);
   };
 
   const speak = (text) => {
@@ -152,7 +154,10 @@ const PoseTrainer = () => {
   return (
     <S.Wrapper>
       <S.HeaderBox>
-        <S.BackImage src="/icons/arrow.svg" onClick={() => navigate(-1)} />
+        <S.BackImage
+          src="/icons/arrow.svg"
+          onClick={() => navigate(ROUTE_PATHS.TRAINING)}
+        />
         <S.HeaderTitle>팔굽혀펴기</S.HeaderTitle>
         <S.HeaderSemiTitle onClick={handleShowExitModal}>
           종료

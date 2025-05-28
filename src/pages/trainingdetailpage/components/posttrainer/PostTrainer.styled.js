@@ -151,6 +151,8 @@ export const HeaderBox = styled.div`
 
 export const BackImage = styled.img`
   width: 30px;
+  transform: rotate(180deg);
+  cursor: pointer;
 `;
 
 export const HeaderTitle = styled.div`
