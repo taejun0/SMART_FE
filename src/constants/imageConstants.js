@@ -54,4 +54,9 @@ export const IMAGE_CONSTANTS = {
   Historybox2: '/images/shoot.svg',
 
   SPINNER: '/icons/Spinner.svg',
+
+  TRAIN1: 'images/train1.svg',
+  TRAIN2: 'images/train2.svg',
+  TRAIN3: 'images/train3.svg',
+  TRAIN4: 'images/train4.svg',
 };
