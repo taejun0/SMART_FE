@@ -1,11 +1,8 @@
 import * as S from './PostTrainer.styled';
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Pose } from '@mediapipe/pose';
-import { Camera } from '@mediapipe/camera_utils';
 
 import { ROUTE_PATHS } from '@constants/routeConstants';
-
 import useTrainingStore from '@stores/trainingStore';
 
 const calculateAngle = (a, b, c) => {
@@ -59,36 +56,45 @@ const PoseTrainer = () => {
     const canvas = canvasRef.current;
     const video = videoRef.current;
 
-    const pose = new Pose({
-      locateFile: (file) =>
-        `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`,
-    });
+    const initPose = async () => {
+      const { Pose } = await import('@mediapipe/pose');
+      const { Camera } = await import('@mediapipe/camera_utils');
 
-    pose.setOptions({
-      modelComplexity: 1,
-      smoothLandmarks: true,
-      enableSegmentation: false,
-      minDetectionConfidence: 0.7,
-      minTrackingConfidence: 0.7,
-    });
+      const pose = new Pose({
+        locateFile: (file) =>
+          `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`,
+      });
 
-    pose.onResults(onResults);
+      pose.setOptions({
+        modelComplexity: 1,
+        smoothLandmarks: true,
+        enableSegmentation: false,
+        minDetectionConfidence: 0.7,
+        minTrackingConfidence: 0.7,
+      });
 
-    const rect = canvas.getBoundingClientRect();
+      pose.onResults(onResults);
 
-    const camera = new Camera(video, {
-      onFrame: async () => {
-        await pose.send({ image: video });
-      },
-      width: rect.width,
-      height: rect.height,
-    });
+      const rect = canvas.getBoundingClientRect();
 
-    camera.start();
-    cameraRef.current = camera;
+      const camera = new Camera(video, {
+        onFrame: async () => {
+          await pose.send({ image: video });
+        },
+        width: rect.width,
+        height: rect.height,
+      });
+
+      camera.start();
+      cameraRef.current = camera;
+    };
+
+    initPose();
 
     return () => {
-      camera.stop();
+      if (cameraRef.current) {
+        cameraRef.current.stop();
+      }
     };
 
     function onResults(results) {
