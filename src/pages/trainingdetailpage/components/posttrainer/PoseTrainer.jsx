@@ -72,26 +72,20 @@ const PoseTrainer = () => {
 
     const initPose = async () => {
       try {
-        console.log('[INIT] Importing MediaPipe modules...');
-        const poseModule = await import('@mediapipe/pose');
-        const cameraUtils = await import('@mediapipe/camera_utils');
+        console.log('[INFO] Using Pose and Camera from window...');
 
-        console.log('[DEBUG] poseModule:', poseModule);
-        console.log('[DEBUG] cameraUtils:', cameraUtils);
-
-        const PoseConstructor = poseModule.default?.Pose;
-        const CameraConstructor = cameraUtils.default?.Camera;
+        const PoseConstructor = window.Pose;
+        const CameraConstructor = window.Camera;
 
         if (!PoseConstructor || !CameraConstructor) {
           throw new Error(
-            'Pose 또는 Camera 클래스가 모듈에서 올바르게 로드되지 않았습니다.'
+            'window.Pose 또는 window.Camera가 존재하지 않습니다.'
           );
         }
 
-        console.log('[SUCCESS] Modules loaded. Initializing Pose...');
         const pose = new PoseConstructor({
           locateFile: (file) =>
-            `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`,
+            `https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.5/${file}`,
         });
 
         pose.setOptions({
