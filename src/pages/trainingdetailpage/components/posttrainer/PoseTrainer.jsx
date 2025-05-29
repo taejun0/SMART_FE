@@ -73,10 +73,8 @@ const PoseTrainer = () => {
     const initPose = async () => {
       try {
         console.log('[INIT] Importing MediaPipe modules...');
-        const poseModule = await import('@mediapipe/pose');
-        const cameraUtils = await import('@mediapipe/camera_utils');
-        const Pose = poseModule.Pose;
-        const Camera = cameraUtils.Camera;
+        const { Pose } = await import('@mediapipe/pose');
+        const { Camera } = await import('@mediapipe/camera_utils');
 
         console.log('[SUCCESS] Modules loaded. Initializing Pose...');
         const pose = new Pose({
