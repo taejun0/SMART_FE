@@ -70,8 +70,11 @@ const PoseTrainer = () => {
     const video = videoRef.current;
 
     const initPose = async () => {
-      const { Pose } = await import('@mediapipe/pose');
-      const { Camera } = await import('@mediapipe/camera_utils');
+      const poseModule = await import('@mediapipe/pose');
+      const cameraUtils = await import('@mediapipe/camera_utils');
+
+      const Pose = poseModule.Pose;
+      const Camera = cameraUtils.Camera;
 
       const pose = new Pose({
         locateFile: (file) =>
@@ -221,6 +224,7 @@ const PoseTrainer = () => {
           {started ? feedback : '훈련을 시작할게요.'}
         </S.StartButton>
       </S.Container>
+
       {showExitModal && (
         <S.ModalBackdrop>
           <S.ModalBox>
