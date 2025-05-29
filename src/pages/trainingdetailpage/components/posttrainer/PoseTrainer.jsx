@@ -79,8 +79,8 @@ const PoseTrainer = () => {
         console.log('[DEBUG] poseModule:', poseModule);
         console.log('[DEBUG] cameraUtils:', cameraUtils);
 
-        const PoseConstructor = poseModule?.Pose;
-        const CameraConstructor = cameraUtils?.Camera;
+        const PoseConstructor = poseModule.default?.Pose;
+        const CameraConstructor = cameraUtils.default?.Camera;
 
         if (!PoseConstructor || !CameraConstructor) {
           throw new Error(
