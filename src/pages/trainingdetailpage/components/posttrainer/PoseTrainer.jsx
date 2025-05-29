@@ -76,6 +76,9 @@ const PoseTrainer = () => {
         const poseModule = await import('@mediapipe/pose');
         const cameraUtils = await import('@mediapipe/camera_utils');
 
+        console.log('[DEBUG] poseModule:', poseModule);
+        console.log('[DEBUG] cameraUtils:', cameraUtils);
+
         const PoseConstructor = poseModule?.Pose;
         const CameraConstructor = cameraUtils?.Camera;
 
