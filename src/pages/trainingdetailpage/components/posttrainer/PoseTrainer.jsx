@@ -73,11 +73,20 @@ const PoseTrainer = () => {
     const initPose = async () => {
       try {
         console.log('[INIT] Importing MediaPipe modules...');
-        const { Pose } = await import('@mediapipe/pose');
-        const { Camera } = await import('@mediapipe/camera_utils');
+        const poseModule = await import('@mediapipe/pose');
+        const cameraUtils = await import('@mediapipe/camera_utils');
+
+        const PoseConstructor = poseModule?.Pose;
+        const CameraConstructor = cameraUtils?.Camera;
+
+        if (!PoseConstructor || !CameraConstructor) {
+          throw new Error(
+            'Pose 또는 Camera 클래스가 모듈에서 올바르게 로드되지 않았습니다.'
+          );
+        }
 
         console.log('[SUCCESS] Modules loaded. Initializing Pose...');
-        const pose = new Pose({
+        const pose = new PoseConstructor({
           locateFile: (file) =>
             `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`,
         });
@@ -93,7 +102,7 @@ const PoseTrainer = () => {
         pose.onResults(onResults);
 
         const rect = canvas.getBoundingClientRect();
-        const camera = new Camera(video, {
+        const camera = new CameraConstructor(video, {
           onFrame: async () => {
             await pose.send({ image: video });
           },
