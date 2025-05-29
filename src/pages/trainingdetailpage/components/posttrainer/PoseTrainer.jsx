@@ -42,6 +42,19 @@ const PoseTrainer = () => {
     window.speechSynthesis.speak(utterance);
   };
 
+  const handleStartTraining = async () => {
+    if (started) return;
+
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      stream.getTracks().forEach((track) => track.stop());
+      setStarted(true);
+    } catch (err) {
+      alert('카메라 접근 권한이 필요합니다. 브라우저 설정을 확인해주세요.');
+      console.error('Camera permission denied:', err);
+    }
+  };
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -204,7 +217,7 @@ const PoseTrainer = () => {
 
         {started && <S.StatusText $test={started}>{counter}번</S.StatusText>}
 
-        <S.StartButton onClick={() => setStarted(true)}>
+        <S.StartButton onClick={handleStartTraining} disabled={started}>
           {started ? feedback : '훈련을 시작할게요.'}
         </S.StartButton>
       </S.Container>

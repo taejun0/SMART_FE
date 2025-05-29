@@ -136,7 +136,7 @@ export const StartButton = styled.button`
   background-color: ${({ theme }) => theme.colors.green01};
   color: ${({ theme }) => theme.colors.white};
   font-size: 1rem;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   margin: 1rem auto 0;
   display: block;
 `;
