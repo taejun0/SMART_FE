@@ -1,7 +1,6 @@
 import * as S from './PostTrainer.styled';
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { ROUTE_PATHS } from '@constants/routeConstants';
 import useTrainingStore from '@stores/trainingStore';
 
@@ -45,12 +44,14 @@ const PoseTrainer = () => {
     if (started) return;
 
     try {
+      console.log('[START] Requesting camera permission...');
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      console.log('[SUCCESS] Camera permission granted.');
       stream.getTracks().forEach((track) => track.stop());
       setStarted(true);
     } catch (err) {
       alert('카메라 접근 권한이 필요합니다. 브라우저 설정을 확인해주세요.');
-      console.error('Camera permission denied:', err);
+      console.error('[ERROR] Camera permission denied:', err);
     }
   };
 
@@ -60,6 +61,7 @@ const PoseTrainer = () => {
     const rect = canvas.getBoundingClientRect();
     canvas.width = rect.width;
     canvas.height = rect.height;
+    console.log('[INFO] Canvas size set:', rect.width, rect.height);
   }, []);
 
   useEffect(() => {
@@ -69,110 +71,124 @@ const PoseTrainer = () => {
     const video = videoRef.current;
 
     const initPose = async () => {
-      const poseModule = await import('@mediapipe/pose');
-      const cameraUtils = await import('@mediapipe/camera_utils');
+      try {
+        console.log('[INIT] Importing MediaPipe modules...');
+        const poseModule = await import('@mediapipe/pose');
+        const cameraUtils = await import('@mediapipe/camera_utils');
+        const Pose = poseModule.Pose;
+        const Camera = cameraUtils.Camera;
 
-      const Pose = poseModule.Pose;
-      const Camera = cameraUtils.Camera;
+        console.log('[SUCCESS] Modules loaded. Initializing Pose...');
+        const pose = new Pose({
+          locateFile: (file) =>
+            `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`,
+        });
 
-      const pose = new Pose({
-        locateFile: (file) =>
-          `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`,
-      });
+        pose.setOptions({
+          modelComplexity: 1,
+          smoothLandmarks: true,
+          enableSegmentation: false,
+          minDetectionConfidence: 0.7,
+          minTrackingConfidence: 0.7,
+        });
 
-      pose.setOptions({
-        modelComplexity: 1,
-        smoothLandmarks: true,
-        enableSegmentation: false,
-        minDetectionConfidence: 0.7,
-        minTrackingConfidence: 0.7,
-      });
+        pose.onResults(onResults);
 
-      pose.onResults(onResults);
+        const rect = canvas.getBoundingClientRect();
+        const camera = new Camera(video, {
+          onFrame: async () => {
+            await pose.send({ image: video });
+          },
+          width: rect.width,
+          height: rect.height,
+        });
 
-      const rect = canvas.getBoundingClientRect();
-
-      const camera = new Camera(video, {
-        onFrame: async () => {
-          await pose.send({ image: video });
-        },
-        width: rect.width,
-        height: rect.height,
-      });
-
-      camera.start();
-      cameraRef.current = camera;
+        console.log('[START] Starting camera...');
+        camera.start();
+        cameraRef.current = camera;
+      } catch (err) {
+        console.error('[ERROR] initPose failed:', err);
+      }
     };
 
     initPose();
 
     return () => {
       if (cameraRef.current) {
+        console.log('[CLEANUP] Stopping camera...');
         cameraRef.current.stop();
       }
     };
 
     function onResults(results) {
-      const canvasCtx = canvas.getContext('2d');
-      const { width, height } = canvas;
+      try {
+        const canvasCtx = canvas.getContext('2d');
+        const { width, height } = canvas;
+        canvasCtx.clearRect(0, 0, width, height);
+        canvasCtx.drawImage(results.image, 0, 0, width, height);
 
-      canvasCtx.clearRect(0, 0, width, height);
-      canvasCtx.drawImage(results.image, 0, 0, width, height);
+        if (results.poseLandmarks) {
+          const lm = results.poseLandmarks;
+          const isReliable = (index) => lm[index].visibility > 0.75;
+          const keypoints = [11, 13, 15];
+          const allVisible = keypoints.every(isReliable);
 
-      if (results.poseLandmarks) {
-        const lm = results.poseLandmarks;
-        const isReliable = (index) => lm[index].visibility > 0.75;
-        const keypoints = [11, 13, 15];
-        const allVisible = keypoints.every(isReliable);
+          if (!allVisible) {
+            console.warn('[WARN] Not all keypoints visible.');
+            setFeedback('자세 인식이 불안정합니다');
+            speak('자세 인식이 불안정합니다');
+            stageRef.current = null;
+            hasCountedRef.current = false;
+            return;
+          }
 
-        if (!allVisible) {
-          setFeedback('자세 인식이 불안정합니다');
-          speak('자세 인식이 불안정합니다');
+          const toCoord = (lm) => [lm.x * width, lm.y * height];
+          const shoulder = toCoord(lm[11]);
+          const elbow = toCoord(lm[13]);
+          const wrist = toCoord(lm[15]);
+
+          const angle = calculateAngle(shoulder, elbow, wrist);
+          console.log('[ANGLE]', angle);
+
+          if (angle > 160) {
+            if (stageRef.current !== 'down') {
+              console.log('[STAGE] → down');
+              stageRef.current = 'down';
+              hasCountedRef.current = false;
+              setFeedback('팔을 내리고 있어요');
+              speak('팔을 내리고 있어요');
+            }
+          } else if (
+            angle < 90 &&
+            stageRef.current === 'down' &&
+            !hasCountedRef.current
+          ) {
+            console.log('[COUNT] +1');
+            stageRef.current = 'up';
+            hasCountedRef.current = true;
+            setCounter((prev) => prev + 1);
+            setFeedback('Count! 아주 정확한 자세에요.');
+            speak('Count! 아주 정확한 자세에요.');
+            incrementCount();
+            addFeedback('정확한 자세에요!');
+          } else if (
+            angle >= 90 &&
+            angle <= 160 &&
+            stageRef.current === 'down' &&
+            !hasCountedRef.current
+          ) {
+            setFeedback('더 내려가야 해요!');
+            speak('더 내려가야 해요!');
+          }
+        } else {
+          console.warn('[WARN] No pose landmarks detected');
+          setFeedback('자세를 다시 잡아주세요');
+          speak('자세를 다시 잡아주세요');
           stageRef.current = null;
           hasCountedRef.current = false;
-          return;
         }
-
-        const toCoord = (lm) => [lm.x * width, lm.y * height];
-        const shoulder = toCoord(lm[11]);
-        const elbow = toCoord(lm[13]);
-        const wrist = toCoord(lm[15]);
-
-        const angle = calculateAngle(shoulder, elbow, wrist);
-
-        if (angle > 160) {
-          if (stageRef.current !== 'down') {
-            stageRef.current = 'down';
-            hasCountedRef.current = false;
-            setFeedback('팔을 내리고 있어요');
-            speak('팔을 내리고 있어요');
-          }
-        } else if (
-          angle < 90 &&
-          stageRef.current === 'down' &&
-          !hasCountedRef.current
-        ) {
-          stageRef.current = 'up';
-          hasCountedRef.current = true;
-          setCounter((prev) => prev + 1);
-          setFeedback('Count! 아주 정확한 자세에요.');
-          speak('Count! 아주 정확한 자세에요.');
-          incrementCount();
-          addFeedback('정확한 자세에요!');
-        } else if (
-          angle >= 90 &&
-          angle <= 160 &&
-          stageRef.current === 'down' &&
-          !hasCountedRef.current
-        ) {
-          setFeedback('더 내려가야 해요!');
-          speak('더 내려가야 해요!');
-        }
-      } else {
-        setFeedback('자세를 다시 잡아주세요');
-        speak('자세를 다시 잡아주세요');
-        stageRef.current = null;
-        hasCountedRef.current = false;
+      } catch (err) {
+        console.error('[ERROR] onResults processing failed:', err);
       }
     }
   }, [started]);
