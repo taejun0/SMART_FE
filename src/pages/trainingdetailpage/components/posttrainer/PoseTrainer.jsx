@@ -24,7 +24,6 @@ const PoseTrainer = () => {
   const stageRef = useRef(null);
   const hasCountedRef = useRef(false);
   const cameraRef = useRef(null);
-
   const [showExitModal, setShowExitModal] = useState(false);
 
   const handleShowExitModal = () => setShowExitModal(true);
