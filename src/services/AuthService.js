@@ -1,24 +1,29 @@
+import { instance } from './instance';
+
 const AuthService = {
   loginSoldier: async ({ militaryId, password }) => {
-    console.log('[MOCK SOLDIER LOGIN]', { militaryId, password });
-    return {
-      success: true,
-      message: '병사 로그인 성공',
-      token: 'mock-soldier-jwt-token',
-    };
+    const response = await instance.post('/api/v1/auth/sign-in', {
+      service_number: militaryId,
+      password,
+    });
+
+    console.log(response.data);
+    return response.data;
   },
 
   loginOfficer: async ({ militaryId, password }) => {
-    console.log('[MOCK OFFICER LOGIN]', { militaryId, password });
-    return {
-      success: true,
-      message: '간부 로그인 성공',
-      token: 'mock-officer-jwt-token',
-    };
+    const response = await instance.post('/api/v1/auth/sign-in', {
+      service_number: militaryId,
+      password,
+    });
+
+    return response.data;
   },
 
   signup: async ({
     name,
+    birth,
+    enlistDate,
     branch,
     unit,
     company,
@@ -27,21 +32,23 @@ const AuthService = {
     militaryId,
     password,
   }) => {
-    console.log('[MOCK SIGNUP]', {
-      name,
-      branch,
-      unit,
-      company,
-      platoon,
-      rank,
-      militaryId,
+    const requestBody = {
+      soldier_name: name,
+      birth,
+      enlistment_date: enlistDate,
+      military_branch: branch,
+      military_name: unit,
+      company: Number(company),
+      platoon: Number(platoon),
+      military_rank: rank,
+      service_number: militaryId,
       password,
-    });
-    return {
-      success: true,
-      message: '회원가입 성공',
     };
+    console.log(requestBody);
+    const response = await instance.post('/api/v1/auth/sign-up', requestBody);
+    return response.data;
   },
+
   getUserInfo: async () => {
     return {
       role: '병사',
