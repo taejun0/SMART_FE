@@ -19,7 +19,6 @@ import { NotFound } from '@pages/notfound/NotFound';
 
 const router = createBrowserRouter([
   {
-    path: ROUTE_PATHS.MAIN,
     element: <DefaultLayout />,
     children: [
       {
