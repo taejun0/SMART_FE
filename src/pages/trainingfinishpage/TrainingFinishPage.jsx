@@ -20,14 +20,9 @@ export const TrainingFinishPage = () => {
         <S.Box>
           <S.BoxImage src="/icons/chart2.svg" />총 {count}회 수행하셨어요
         </S.Box>
-        {Object.entries(
-          feedbacks.reduce((acc, cur) => {
-            acc[cur] = (acc[cur] || 0) + 1;
-            return acc;
-          }, {})
-        ).map(([text, count], idx) => (
+        {feedbacks.map((fb, idx) => (
           <S.FeedbackItem key={idx}>
-            "{text}" - {count}회
+            "{fb.text}" - {fb.count}회
           </S.FeedbackItem>
         ))}
       </S.FeedbackList>

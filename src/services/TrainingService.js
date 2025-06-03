@@ -1,5 +1,7 @@
 import { instance } from './instance';
 
+import dayjs from 'dayjs';
+
 const TrainingService = {
   postPushupResult: async ({
     count,
@@ -122,13 +124,40 @@ const TrainingService = {
     return fullData.slice(start, end);
   },
   getPushupHistory: async () => {
-    return [
-      { year: 2025, month: 1, value: 65, mockValue: 60 }, // 1급
-      { year: 2025, month: 2, value: 72, mockValue: 66 }, // 특급
-      { year: 2025, month: 3, value: 48, mockValue: 52 }, // 3급
-      { year: 2025, month: 4, value: 40, mockValue: 60 }, // 불합격
-      { year: 2025, month: 5, value: 56, mockValue: 45 }, // 2급
-    ];
+    const res = await instance.get('/api/v1/pushups');
+    const data = res.data.data;
+
+    console.log(data);
+
+    const grouped = {};
+
+    data.forEach((item) => {
+      const date = dayjs(item.evaluation_date);
+      const year = date.year();
+      const month = date.month() + 1;
+      const key = `${year}-${month}`;
+
+      if (!grouped[key]) {
+        grouped[key] = {
+          year,
+          month,
+          value: null,
+          mockValue: null,
+        };
+      }
+
+      if (item.evaluation_type === 'TRAINING') {
+        grouped[key].mockValue = item.count;
+      } else if (item.evaluation_type === 'TEST') {
+        grouped[key].value = item.count;
+      }
+    });
+
+    console.log(grouped);
+
+    return Object.values(grouped).sort(
+      (a, b) => a.year - b.year || a.month - b.month
+    );
   },
 
   getSitupHistory: async () => {

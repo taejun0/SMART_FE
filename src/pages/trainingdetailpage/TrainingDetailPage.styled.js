@@ -13,7 +13,6 @@ export const Contatiner = styled.div`
   flex-direction: column;
   width: calc(100% - 4rem);
   height: 100%;
-  padding: 2rem;
 `;
 
 export const StartButton = styled.button`
