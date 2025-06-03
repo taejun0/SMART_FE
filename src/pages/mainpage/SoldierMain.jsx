@@ -36,7 +36,7 @@ export const SoldierMain = ({ userInfo }) => {
         <S.DataInfo>
           <S.SemiTitleBox>
             <S.SemiTitle>{MAINSOLCONSTANTS.SemiTitle.SemiTItle1}</S.SemiTitle>
-            <S.PlusButton onClick={() => navigate('feedback')}>
+            <S.PlusButton onClick={() => navigate('/feedback')}>
               {MAINSOLCONSTANTS.SemiTitle.plus}
             </S.PlusButton>
           </S.SemiTitleBox>
