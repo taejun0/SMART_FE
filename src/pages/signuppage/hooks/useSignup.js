@@ -11,8 +11,8 @@ import { isValidPassword } from '@utils/loginValidation';
 export const useSignup = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
-  const [values, setValues] = useState(Array(9).fill(''));
-  const [dropdownStates, setDropdownStates] = useState(Array(9).fill(false));
+  const [values, setValues] = useState(Array(11).fill(''));
+  const [dropdownStates, setDropdownStates] = useState(Array(11).fill(false));
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isTermModalOpen, setIsTermModalOpen] = useState(false);
@@ -40,13 +40,13 @@ export const useSignup = () => {
   };
 
   const closeAllDropdowns = () => {
-    setDropdownStates(Array(9).fill(false));
+    setDropdownStates(Array(11).fill(false));
   };
 
   const fields = values.map((val, index) => {
     const isSelect = SIGNUP_CONSTANTS.OPTIONS[index] !== undefined;
-    const isPassword = index === 7;
-    const isConfirmPassword = index === 8;
+    const isPassword = index === 9;
+    const isConfirmPassword = index === 10;
 
     return {
       title:
@@ -59,7 +59,13 @@ export const useSignup = () => {
       readOnly: index < step || isSelect,
       visible: index <= step,
       type:
-        index === 7 || index === 8 ? 'password' : isSelect ? 'select' : 'text',
+        index === 9 || index === 10
+          ? 'password'
+          : index === 1 || index === 2
+          ? 'date'
+          : SIGNUP_CONSTANTS.OPTIONS[index]
+          ? 'select'
+          : 'text',
       isCurrent: index === step,
       options: SIGNUP_CONSTANTS.OPTIONS[index] || [],
       isDropdownOpen: dropdownStates[index],
@@ -87,7 +93,7 @@ export const useSignup = () => {
           ? SIGNUP_CONSTANTS.IMGAE.eye
           : SIGNUP_CONSTANTS.IMGAE.noneye
         : null,
-      error: isPassword && step === 7 ? !isValidPassword : false,
+      error: isPassword && step === 9 ? !isValidPassword(val) : false,
     };
   });
 
@@ -96,13 +102,15 @@ export const useSignup = () => {
   const submitSignup = async () => {
     const signupData = {
       name: values[0],
-      branch: values[1],
-      unit: values[2],
-      company: values[3],
-      platoon: values[4],
-      rank: values[5],
-      militaryId: values[6],
-      password: values[7],
+      birth: values[1],
+      enlistDate: values[2],
+      branch: values[3],
+      unit: values[4],
+      company: values[5],
+      platoon: values[6],
+      rank: values[7],
+      militaryId: values[8],
+      password: values[9],
     };
 
     try {
@@ -126,8 +134,8 @@ export const useSignup = () => {
     submitSignup,
     goToNextStep: () => {
       closeAllDropdowns();
-      if (step < 8) setStep(step + 1);
-      if (step === 8) setIsTermModalOpen(true);
+      if (step < 10) setStep(step + 1);
+      if (step === 10) setIsTermModalOpen(true);
     },
     goToPrevStep: () => {
       closeAllDropdowns();
@@ -135,10 +143,10 @@ export const useSignup = () => {
     },
     closeAllDropdowns,
     isValid:
-      step === 7
-        ? isValidPassword(values[7])
-        : step === 8
-        ? values[7] === values[8] && isValidPassword(values[7])
+      step === 9
+        ? isValidPassword(values[9])
+        : step === 10
+        ? values[9] === values[10] && isValidPassword(values[9])
         : values[step].trim() !== '',
   };
 };

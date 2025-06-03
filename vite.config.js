@@ -6,15 +6,15 @@ import fs from 'fs';
 export default defineConfig({
   base: '/',
   plugins: [react()],
-  server:
-    process.env.NODE_ENV === 'development'
-      ? {
-          https: {
-            key: fs.readFileSync(path.resolve(__dirname, 'localhost-key.pem')),
-            cert: fs.readFileSync(path.resolve(__dirname, 'localhost.pem')),
-          },
-        }
-      : {},
+  // server:
+  //   process.env.NODE_ENV === 'development'
+  //     ? {
+  //         https: {
+  //           key: fs.readFileSync(path.resolve(__dirname, 'localhost-key.pem')),
+  //           cert: fs.readFileSync(path.resolve(__dirname, 'localhost.pem')),
+  //         },
+  //       }
+  //     : {},
   resolve: {
     alias: {
       '@assets': path.resolve(__dirname, 'src/assets'),
