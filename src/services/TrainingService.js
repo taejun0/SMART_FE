@@ -1,6 +1,20 @@
 import { instance } from './instance';
 
 const TrainingService = {
+  postPushupResult: async ({
+    count,
+    summary,
+    evaluation_type,
+    evaluation_date,
+  }) => {
+    return await instance.post('/api/v1/pushups', {
+      count,
+      summary,
+      evaluation_type,
+      evaluation_date,
+    });
+  },
+
   getFeedback: async (page = 1, size = 10) => {
     const fullData = [
       {

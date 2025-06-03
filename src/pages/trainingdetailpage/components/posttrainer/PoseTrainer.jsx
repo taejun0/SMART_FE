@@ -1,8 +1,12 @@
 import * as S from './PostTrainer.styled';
+
+import TrainingService from '@services/TrainingService';
+
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ROUTE_PATHS } from '@constants/routeConstants';
 import useTrainingStore from '@stores/trainingStore';
+import dayjs from 'dayjs';
 
 const calculateAngle = (a, b, c) => {
   const radians =
@@ -13,7 +17,8 @@ const calculateAngle = (a, b, c) => {
 };
 
 const PoseTrainer = () => {
-  const { addFeedback, incrementCount } = useTrainingStore();
+  const { mode } = useParams();
+  const { addFeedback, incrementCount, feedbacks } = useTrainingStore();
   const navigate = useNavigate();
   const [started, setStarted] = useState(false);
   const videoRef = useRef(null);
@@ -27,7 +32,26 @@ const PoseTrainer = () => {
 
   const handleShowExitModal = () => setShowExitModal(true);
   const handleCloseExitModal = () => setShowExitModal(false);
-  const handleConfirmExit = () => {
+
+  const handleConfirmExit = async () => {
+    const evaluationType = mode === 'training' ? 'TRAINING' : 'TEST';
+    const evaluationDate = dayjs().toISOString();
+    const summary = feedbacks
+      .map(({ text, count }) => `${text} ${count}회`)
+      .join(', ');
+
+    try {
+      await TrainingService.postPushupResult({
+        count: counter,
+        summary,
+        evaluation_type: evaluationType,
+        evaluation_date: evaluationDate,
+      });
+      console.log('✅ 훈련 결과 전송 성공');
+    } catch (err) {
+      console.error('❌ 훈련 결과 전송 실패:', err);
+    }
+
     setStarted(false);
     setShowExitModal(false);
     navigate(ROUTE_PATHS.TRAINING_FINISH);
