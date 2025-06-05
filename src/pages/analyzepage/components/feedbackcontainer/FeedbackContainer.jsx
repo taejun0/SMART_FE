@@ -13,7 +13,14 @@ const FeedbackBoxContainer = ({ comment, date }) => {
           />
           {date}
         </S.FeedbackBoxTitle>
-        <S.FeedbackBoxComment>{comment}</S.FeedbackBoxComment>
+        <S.FeedbackBoxComment>
+          {comment.split('\n').map((line, index) => (
+            <span key={index}>
+              {line}
+              <br />
+            </span>
+          ))}
+        </S.FeedbackBoxComment>
       </S.FeedbackBox>
     </S.FeedbackContainer>
   );
