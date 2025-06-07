@@ -9,12 +9,27 @@ const TrainingService = {
     evaluation_type,
     evaluation_date,
   }) => {
-    return await instance.post('/api/v1/pushups', {
-      count,
-      summary,
-      evaluation_type,
-      evaluation_date,
-    });
+    try {
+      return await instance.post('/api/v1/pushups', {
+        count,
+        summary,
+        evaluation_type,
+        evaluation_date,
+      });
+    } catch (error) {
+      const res = error?.response;
+
+      if (res?.data?.code === 40004) {
+        return await instance.patch('/api/v1/pushups', {
+          count,
+          summary,
+          evaluation_type,
+          evaluation_date,
+        });
+      } else {
+        throw error;
+      }
+    }
   },
 
   getFeedback: async (page = 1, size = 10) => {
@@ -92,6 +107,7 @@ const TrainingService = {
 
     const fullData = pushupData
       .map((item) => {
+        if (!item) return null;
         const date = dayjs(item.evaluation_date).format('YYYY.MM.DD');
         const mock = mockData.find((d) => d.date === date) || {};
         const situp = situpMap[date];
@@ -108,6 +124,7 @@ const TrainingService = {
           shooting: mock.shooting ?? null,
         };
       })
+      .filter(Boolean)
       .sort((a, b) => new Date(b.date) - new Date(a.date));
 
     const start = (page - 1) * size;
