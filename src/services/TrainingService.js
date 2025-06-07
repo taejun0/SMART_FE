@@ -32,6 +32,35 @@ const TrainingService = {
     }
   },
 
+  postSitupResult: async ({
+    count,
+    summary,
+    evaluation_type,
+    evaluation_date,
+  }) => {
+    try {
+      return await instance.post('/api/v1/situps', {
+        count,
+        summary,
+        evaluation_type,
+        evaluation_date,
+      });
+    } catch (error) {
+      const res = error?.response;
+
+      if (res?.data?.code === 40004) {
+        return await instance.patch('/api/v1/situps', {
+          count,
+          summary,
+          evaluation_type,
+          evaluation_date,
+        });
+      } else {
+        throw error;
+      }
+    }
+  },
+
   getFeedback: async (page = 1, size = 10) => {
     const [pushupRes, situpRes] = await Promise.all([
       instance.get('/api/v1/pushups'),
