@@ -9,113 +9,162 @@ const TrainingService = {
     evaluation_type,
     evaluation_date,
   }) => {
-    return await instance.post('/api/v1/pushups', {
-      count,
-      summary,
-      evaluation_type,
-      evaluation_date,
-    });
+    try {
+      return await instance.post('/api/v1/pushups', {
+        count,
+        summary,
+        evaluation_type,
+        evaluation_date,
+      });
+    } catch (error) {
+      const res = error?.response;
+
+      if (res?.data?.code === 40004) {
+        return await instance.patch('/api/v1/pushups', {
+          count,
+          summary,
+          evaluation_type,
+          evaluation_date,
+        });
+      } else {
+        throw error;
+      }
+    }
+  },
+
+  postSitupResult: async ({
+    count,
+    summary,
+    evaluation_type,
+    evaluation_date,
+  }) => {
+    try {
+      return await instance.post('/api/v1/situps', {
+        count,
+        summary,
+        evaluation_type,
+        evaluation_date,
+      });
+    } catch (error) {
+      const res = error?.response;
+
+      if (res?.data?.code === 40004) {
+        return await instance.patch('/api/v1/situps', {
+          count,
+          summary,
+          evaluation_type,
+          evaluation_date,
+        });
+      } else {
+        throw error;
+      }
+    }
   },
 
   getFeedback: async (page = 1, size = 10) => {
-    const res = await instance.get('/api/v1/pushups');
-    const pushupData = res.data.data;
+    const [pushupRes, situpRes] = await Promise.all([
+      instance.get('/api/v1/pushups'),
+      instance.get('/api/v1/situps'),
+    ]);
+
+    const pushupData = pushupRes.data.data;
+    const situpData = situpRes.data.data;
 
     const mockData = [
       {
         date: '2025.05.12',
-        situp: 50,
         running: 12.2,
         shooting: 19,
       },
       {
         date: '2025.05.10',
-        situp: 60,
         running: 13.2,
         shooting: 17,
       },
       {
         date: '2025.05.09',
-        situp: 62,
         running: 14.0,
         shooting: 15,
       },
       {
         date: '2025.05.08',
-        situp: 58,
         running: 15.5,
         shooting: 18,
       },
       {
         date: '2025.05.07',
-        situp: 60,
         running: 13.9,
         shooting: 16,
       },
       {
         date: '2025.05.06',
-        situp: 65,
         running: 14.5,
         shooting: 12,
       },
       {
         date: '2025.05.05',
-        situp: 55,
         running: 15.2,
         shooting: 14,
       },
       {
         date: '2025.05.04',
-        situp: 63,
         running: 13.7,
         shooting: 19,
       },
       {
         date: '2025.05.03',
-        situp: 64,
         running: 13.5,
         shooting: 20,
       },
       {
         date: '2025.05.02',
-        situp: 61,
         running: 13.8,
         shooting: 18,
       },
       {
         date: '2025.05.01',
-        situp: 66,
         running: 14.1,
         shooting: 15,
       },
     ];
 
+    const situpMap = {};
+    situpData.forEach((item) => {
+      const date = dayjs(item.evaluation_date).format('YYYY.MM.DD');
+      situpMap[date] = item;
+    });
+
     const fullData = pushupData
-      .map((item, index) => {
+      .map((item) => {
+        if (!item) return null;
         const date = dayjs(item.evaluation_date).format('YYYY.MM.DD');
-        const mock = mockData[index] || {};
+        const mock = mockData.find((d) => d.date === date) || {};
+        const situp = situpMap[date];
+
+        const pushupSummary = `[팔굽혀펴기] ${item.summary}`;
+        const situpSummary = situp ? `\n[윗몸일으키기] ${situp.summary}` : '';
 
         return {
           date,
-          comment: item.summary,
+          comment: pushupSummary + situpSummary,
           pushup: item.count,
-          situp: mock.situp ?? null,
+          situp: situp ? situp.count : null,
           running: mock.running ?? null,
           shooting: mock.shooting ?? null,
         };
       })
+      .filter(Boolean)
       .sort((a, b) => new Date(b.date) - new Date(a.date));
 
     const start = (page - 1) * size;
     const end = start + size;
+    console.log(fullData);
     return fullData.slice(start, end);
   },
 
   getPushupHistory: async () => {
     const res = await instance.get('/api/v1/pushups');
     const data = res.data.data;
-
-    console.log(data);
 
     const grouped = {};
 

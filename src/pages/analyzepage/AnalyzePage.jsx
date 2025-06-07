@@ -32,7 +32,7 @@ export const AnalyzePage = () => {
             {latest && (
               <FeedbackBoxContainer
                 comment={latest.comment}
-                date={previous.date}
+                date={latest?.date ?? '날짜 없음'}
               />
             )}
           </>
