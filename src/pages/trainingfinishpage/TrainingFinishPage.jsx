@@ -1,12 +1,22 @@
 import * as S from './TrainingFinishPage.styled';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { ROUTE_PATHS } from '@constants/routeConstants';
 import useTrainingStore from '@stores/trainingStore';
 
 export const TrainingFinishPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { count, feedbacks, reset } = useTrainingStore();
+
+  const isFromRun = location.state?.from === 'run';
+
+  const formatTime = (totalSeconds) => {
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes}분 ${seconds}초`;
+  };
+
   return (
     <S.Wrapper>
       <S.TitleBox>
@@ -18,7 +28,8 @@ export const TrainingFinishPage = () => {
 
       <S.FeedbackList>
         <S.Box>
-          <S.BoxImage src="/icons/chart2.svg" />총 {count}회 수행하셨어요
+          <S.BoxImage src="/icons/chart2.svg" />총{' '}
+          {isFromRun ? formatTime(count) : `${count}회`} 수행하셨어요
         </S.Box>
         {feedbacks.map((fb, idx) => (
           <S.FeedbackItem key={idx}>
