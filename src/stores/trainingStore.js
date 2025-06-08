@@ -23,6 +23,8 @@ const useTrainingStore = create((set) => ({
 
   incrementCount: () => set((state) => ({ count: state.count + 1 })),
 
+  setCount: (value) => set({ count: value }),
+
   reset: () => set({ feedbacks: [], count: 0 }),
 }));
 
