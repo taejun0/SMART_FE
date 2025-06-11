@@ -104,10 +104,10 @@ const RunningTrainer = () => {
           </S.SubTitle>
           <S.Line />
           <S.ImageList>
-            <S.Images src="/images/pmedal1.svg" />
-            <S.Images src="/images/pmedal2.svg" />
-            <S.Images src="/images/pmedal3.svg" />
-            <S.Images src="/images/pmedal4.svg" />
+            <S.Images src="/images/rmedal1.svg" />
+            <S.Images src="/images/rmedal2.svg" />
+            <S.Images src="/images/rmedal3.svg" />
+            <S.Images src="/images/rmedal4.svg" />
           </S.ImageList>
         </S.FeedbackBox>
 
