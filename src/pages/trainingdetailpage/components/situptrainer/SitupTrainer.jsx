@@ -249,10 +249,10 @@ const SitupTrainer = () => {
           </S.SubTitle>
           <S.Line />
           <S.ImageList>
-            <S.Images src="/images/pmedal1.svg" />
-            <S.Images src="/images/pmedal2.svg" />
-            <S.Images src="/images/pmedal3.svg" />
-            <S.Images src="/images/pmedal4.svg" />
+            <S.Images src="/images/smedal1.svg" />
+            <S.Images src="/images/smedal2.svg" />
+            <S.Images src="/images/smedal3.svg" />
+            <S.Images src="/images/smedal4.svg" />
           </S.ImageList>
         </S.FeedbackBox>
 
