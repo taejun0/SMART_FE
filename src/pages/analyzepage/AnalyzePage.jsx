@@ -14,6 +14,12 @@ export const AnalyzePage = () => {
   const { type, data, latest, previous, diff, isTodayRecord, loading } =
     useAnalyze();
 
+  const formatDecimalToTime = (decimal) => {
+    const min = Math.floor(decimal);
+    const sec = Math.round((decimal - min) * 60);
+    return `${min}분 ${sec < 10 ? '0' + sec : sec}초`;
+  };
+
   if (loading) return <p>로딩 중...</p>;
   if (!data || data.length === 0) return <p>데이터가 없습니다.</p>;
 
@@ -73,9 +79,9 @@ export const AnalyzePage = () => {
                   ? ANALYZECONSTANTS.Feedback.RUNNING.INCREASE
                   : ANALYZECONSTANTS.Feedback.RUNNING.DECREASE
               }
-              content={`지난번의 나보다 ${Math.abs(diff.running).toFixed(2)}${
-                ANALYZECONSTANTS.HistoryLabel.UNIT.TIME
-              } ${diff.running > 0 ? '더 빨리' : '더 늦게'} 뛰었어요.`}
+              content={`지난번의 나보다 ${formatDecimalToTime(
+                Math.abs(diff.running)
+              )} ${diff.running > 0 ? '더 빨리' : '더 늦게'} 뛰었어요.`}
               latest={latest.running}
               previous={previous.running}
               date={previous.date}
