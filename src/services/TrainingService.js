@@ -11,7 +11,7 @@ const TrainingService = {
   }) => {
     try {
       return await instance.post('/api/v1/pushups', {
-        count,
+        record: count,
         summary,
         evaluation_type,
         evaluation_date,
@@ -21,7 +21,7 @@ const TrainingService = {
 
       if (res?.data?.code === 40004) {
         return await instance.patch('/api/v1/pushups', {
-          count,
+          record: count,
           summary,
           evaluation_type,
           evaluation_date,
@@ -40,7 +40,7 @@ const TrainingService = {
   }) => {
     try {
       return await instance.post('/api/v1/situps', {
-        count,
+        record: count,
         summary,
         evaluation_type,
         evaluation_date,
@@ -50,7 +50,7 @@ const TrainingService = {
 
       if (res?.data?.code === 40004) {
         return await instance.patch('/api/v1/situps', {
-          count,
+          record: count,
           summary,
           evaluation_type,
           evaluation_date,
@@ -69,7 +69,7 @@ const TrainingService = {
   }) => {
     try {
       return await instance.post('/api/v1/runnings', {
-        count,
+        record: count,
         summary,
         evaluation_type,
         evaluation_date,
@@ -79,7 +79,7 @@ const TrainingService = {
 
       if (res?.data?.code === 40004) {
         return await instance.patch('/api/v1/runnings', {
-          count,
+          record: count,
           summary,
           evaluation_type,
           evaluation_date,
@@ -176,8 +176,8 @@ const TrainingService = {
         return {
           date,
           comment: pushupSummary + situpSummary,
-          pushup: item.count,
-          situp: situp ? situp.count : null,
+          pushup: item.record,
+          situp: situp ? situp.record : null,
           running: mock.running ?? null,
           shooting: mock.shooting ?? null,
         };
@@ -213,9 +213,9 @@ const TrainingService = {
       }
 
       if (item.evaluation_type === 'TRAINING') {
-        grouped[key].mockValue = item.count;
+        grouped[key].mockValue = item.record;
       } else if (item.evaluation_type === 'TEST') {
-        grouped[key].value = item.count;
+        grouped[key].value = item.record;
       }
     });
 
@@ -248,9 +248,9 @@ const TrainingService = {
       }
 
       if (item.evaluation_type === 'TRAINING') {
-        grouped[key].mockValue = item.count;
+        grouped[key].mockValue = item.record;
       } else if (item.evaluation_type === 'TEST') {
-        grouped[key].value = item.count;
+        grouped[key].value = item.record;
       }
     });
 
