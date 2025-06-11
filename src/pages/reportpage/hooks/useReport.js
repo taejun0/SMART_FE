@@ -51,7 +51,7 @@ export const useReport = () => {
           image: gradeToImage[situpGrade] ?? null,
         },
         running: {
-          value: runningValue ?? '기록 없음',
+          value: formatDecimalToTime(runningValue) ?? '기록 없음',
           grade: runningGrade,
           image: gradeToImage[runningGrade] ?? null,
         },
@@ -61,6 +61,12 @@ export const useReport = () => {
     fetchData();
   }, []);
   return report;
+};
+
+const formatDecimalToTime = (decimal) => {
+  const min = Math.floor(decimal);
+  const sec = Math.round((decimal - min) * 60);
+  return `${min}분 ${sec < 10 ? '0' + sec : sec}초`;
 };
 
 const gradeToImage = {
@@ -85,6 +91,14 @@ const gradeForSitup = (count) => {
   if (count >= 60) return '1급';
   if (count >= 50) return '2급';
   if (count >= 40) return '3급';
+  return '불합격';
+};
+
+const gradeForRunning = (count) => {
+  if (count <= 12.5) return '특급';
+  if (count <= 13.53) return '1급';
+  if (count <= 14.57) return '2급';
+  if (count <= 15.6) return '3급';
   return '불합격';
 };
 
